@@ -1,951 +1,992 @@
 <!doctype html>
 <html lang="vi">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dang tin BDS</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Tahoma, Arial, sans-serif;
-      font-size: 12px;
-      color: #222;
-      background: #fff;
-    }
-
-    a { color: #0b3fb3; text-decoration: none; }
-
-    #header {
-      width: 1119px;
-      margin: 0 auto;
-      padding-top: 6px;
-      background: #fff;
-    }
-
-    .navbar-toggle { display: none; }
-
-    .icon-bar {
-      display: block;
-      width: 28px;
-      height: 3px;
-      margin: 5px 0;
-      background: #333;
-      border-radius: 2px;
-    }
-
-    .mobile-filter-toggle { display: none; }
-
-    .mobile-filter-toggle .filter-text { display: none; }
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
-    }
-
-    #logo {
-      display: inline-block;
-      width: 260px;
-      height: 56px;
-      background: linear-gradient(90deg, #fff, #f6f6f6);
-      position: relative;
-      vertical-align: middle;
-    }
-
-    #logo::before {
-      content: "bonbanh.com";
-      position: absolute;
-      left: 4px;
-      top: 15px;
-      font-size: 34px;
-      line-height: 1;
-      font-weight: 700;
-      letter-spacing: -1px;
-      color: #121212;
-    }
-
-    #logo::after {
-      content: "drive your dreams";
-      position: absolute;
-      right: -165px;
-      top: 21px;
-      color: #888;
-      font-size: 9px;
-      font-style: italic;
-      letter-spacing: 1px;
-      white-space: nowrap;
-      font-family: Georgia, "Times New Roman", serif;
-    }
-
-    #top-nav {
-      float: right;
-      margin-top: 2px;
-    }
-
-    #top-nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-    }
-
-    #top-nav li {
-      padding: 0 13px;
-      border-right: 1px solid #bcbcbc;
-    }
-
-    #top-nav li.ilast {
-      border-right: 0;
-      padding-right: 0;
-    }
-
-    #top-nav a {
-      font-size: 13px;
-      color: #1c3db3;
-    }
-
-    #nav-bar {
-      clear: both;
-      margin-top: 8px;
-      border: 1px solid #c4c4c4;
-      background: #ececec;
-      display: flex;
-    }
-
-    .menu-item {
-      padding: 8px 17px;
-      border-right: 1px solid #c4c4c4;
-      color: #0b3fb3;
-      font-size: 14px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .menu-item:last-child { border-right: 0; }
-
-    #nav_overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.25);
-      z-index: 998;
-    }
-
-    #nav_menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 250px;
-      max-width: 82vw;
-      height: 100vh;
-      background: #f2f2e7;
-      border-right: 1px solid #d6d6d6;
-      transform: translateX(-100%);
-      transition: transform 0.25s ease;
-      z-index: 999;
-      overflow-y: auto;
-      display: none;
-    }
-
-    #nav_menu.slide-active {
-      transform: translateX(0);
-    }
-
-    #nav_menu .menu_content {
-      padding: 8px 0;
-    }
-
-    #nav_menu .ul_menu {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    #nav_menu .ul_menu li {
-      border-bottom: 1px solid #dfdfcf;
-    }
-
-    #nav_menu .ul_menu a {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 12px;
-      color: #0f3fb1;
-      font-size: 12px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    #nav_menu .ul_menu i {
-      width: 12px;
-      height: 12px;
-      border-radius: 2px;
-      background: #0f3fb1;
-      display: inline-block;
-      flex: 0 0 auto;
-      opacity: 0.85;
-    }
-
-    #filter-box {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: 320px;
-      max-width: 92vw;
-      height: 100vh;
-      background: #fff;
-      z-index: 1001;
-      transform: translateX(100%);
-      transition: transform 0.25s ease;
-      border-left: 1px solid #d9d9d9;
-      display: none;
-      overflow: hidden;
-    }
-
-    #filter-box.filter-active {
-      transform: translateX(0);
-    }
-
-    #filter-box .nav-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 8px;
-      border-bottom: 1px solid #e2e2e2;
-      background: #fff;
-    }
-
-    #filter-box .exp_title {
-      font-size: 14px;
-      font-weight: 700;
-      text-transform: uppercase;
-      color: #515151;
-    }
-
-    #filter-box .cancel_filter {
-      border: 0;
-      background: #e24e3f;
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 8px;
-      border-radius: 3px;
-    }
-
-    #filter-box form {
-      height: calc(100vh - 48px);
-      display: flex;
-      flex-direction: column;
-    }
-
-    #filter-box .ul_filter {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      overflow-y: auto;
-      flex: 1;
-      background: #fff;
-    }
-
-    #filter-box .filter_lv1 {
-      border-bottom: 1px solid #ececec;
-      padding: 10px 8px;
-    }
-
-    #filter-box .f_search_text {
-      border: 1px solid #ddd;
-      padding: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: #9aa0a6;
-    }
-
-    #filter-box .f_search_text input {
-      border: 0;
-      outline: none;
-      width: 100%;
-      font-size: 12px;
-    }
-
-    #filter-box .filter_label {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 13px;
-      color: #3a3a3a;
-      font-weight: 700;
-    }
-
-    #filter-box .name_changed,
-    #filter-box .name_changed_new {
-      font-size: 12px;
-      color: #6a6a6a;
-      font-weight: 400;
-    }
-
-    #filter-box .slider {
-      margin-top: 8px;
-      position: relative;
-      height: 14px;
-    }
-
-    #filter-box .slider::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 6px;
-      border-top: 3px solid #2f73dc;
-    }
-
-    #filter-box .slider::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      top: 1px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: 1px solid #c7c7c7;
-      background: #fff;
-    }
-
-    #filter-box .segmented {
-      margin-top: 8px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px;
-    }
-
-    #filter-box .segmented label {
-      border: 1px solid #e3e3e3;
-      border-radius: 2px;
-      text-align: center;
-      padding: 6px 4px;
-      font-size: 11px;
-      color: #666;
-      background: #fbfbfb;
-    }
-
-    #filter-box .segmented input {
-      display: none;
-    }
-
-    #filter-box .fix-bottom {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-top: 1px solid #d8d8d8;
-      background: #2f73dc;
-    }
-
-    #filter-box .fix-bottom button {
-      border: 0;
-      background: transparent;
-      color: #fff;
-      font-size: 11px;
-      font-weight: 700;
-      height: 38px;
-    }
-
-    #filter-box .fix-bottom .button_b + .button_b {
-      border-left: 1px solid rgba(255, 255, 255, 0.4);
-    }
-
-    .page-wrap {
-      width: 1119px;
-      margin: 8px auto 16px;
-    }
-
-    .post-box {
-      border: 1px solid #d5d5d5;
-      background: #fff;
-      padding: 12px;
-    }
-
-    .post-title {
-      margin: 0 0 10px;
-      font-size: 20px;
-      color: #1d1d1d;
-      line-height: 1.2;
-    }
-
-    .post-sub {
-      margin: 0 0 14px;
-      color: #666;
-      font-size: 13px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 170px 1fr;
-      gap: 8px 12px;
-      align-items: start;
-    }
-
-    .form-grid label {
-      font-weight: 700;
-      color: #333;
-      padding-top: 8px;
-    }
-
-    .field {
-      min-width: 0;
-    }
-
-    input[type="text"],
-    input[type="number"],
-    textarea,
-    select {
-      width: 100%;
-      border: 1px solid #cfcfcf;
-      border-radius: 2px;
-      padding: 8px;
-      font-size: 13px;
-      font-family: Tahoma, Arial, sans-serif;
-      color: #222;
-      background: #fff;
-    }
-
-    textarea {
-      min-height: 140px;
-      resize: vertical;
-      line-height: 1.4;
-    }
-
-    .hint {
-      margin-top: 4px;
-      font-size: 11px;
-      color: #666;
-    }
-
-    .upload-area {
-      border: 1px dashed #b8c7e7;
-      background: #f7faff;
-      padding: 10px;
-    }
-
-    .upload-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .upload-btn {
-      display: inline-block;
-      border: 1px solid #2f73dc;
-      color: #2f73dc;
-      background: #fff;
-      padding: 7px 10px;
-      font-size: 12px;
-      font-weight: 700;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-
-    .upload-btn.primary {
-      background: #2f73dc;
-      color: #fff;
-    }
-
-    .upload-input {
-      display: none;
-    }
-
-    .preview-list {
-      margin-top: 10px;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 8px;
-    }
-
-    .preview-item {
-      border: 1px solid #ddd;
-      padding: 4px;
-      background: #fff;
-    }
-
-    .preview-item img {
-      width: 100%;
-      height: 90px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .preview-item .name {
-      margin-top: 4px;
-      font-size: 11px;
-      color: #444;
-      word-break: break-word;
-      line-height: 1.25;
-    }
-
-    .actions {
-      margin-top: 14px;
-      display: flex;
-      gap: 8px;
-      justify-content: flex-end;
-    }
-
-    .actions button {
-      border: 0;
-      padding: 10px 14px;
-      font-size: 13px;
-      font-weight: 700;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-
-    .btn-secondary {
-      color: #2f73dc;
-      border: 1px solid #2f73dc !important;
-      background: #fff;
-    }
-
-    .btn-primary {
-      color: #fff;
-      background: #2f73dc;
-    }
-
-    @media (max-width: 1120px) {
-      #header,
-      .page-wrap {
-        width: 100%;
-        padding-left: 8px;
-        padding-right: 8px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      #header {
-        position: relative;
-        padding: 0 6px;
-        width: 100%;
-        border-top: 1px solid #d8d8d8;
-        border-bottom: 1px solid #d8d8d8;
-      }
-
-      .navbar-toggle {
-        display: block;
-        position: absolute;
-        left: 10px;
-        top: 8px;
-        padding: 6px 4px;
-        z-index: 10;
-      }
-
-      .mobile-filter-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        flex-direction: column;
-        position: absolute;
-        right: 7px;
-        top: 6px;
-        width: 42px;
-        height: 34px;
-        color: #1f57d6;
-      }
-
-      .mobile-filter-toggle::before {
-        content: "";
-        position: absolute;
-        left: 11px;
-        top: 1px;
-        width: 12px;
-        height: 12px;
-        border: 2px solid #1f57d6;
-        border-radius: 50%;
-      }
-
-      .mobile-filter-toggle::after {
-        content: "";
-        position: absolute;
-        right: 10px;
-        top: 14px;
-        width: 7px;
-        height: 2px;
-        background: #1f57d6;
-        transform: rotate(45deg);
-        transform-origin: center;
-      }
-
-      .mobile-filter-toggle .filter-text {
-        display: block;
-        margin-top: 18px;
-        font-size: 10px;
-        line-height: 1;
-        font-weight: 700;
-        color: #1f57d6;
-      }
-
-      #logo {
-        width: 180px;
-        height: 44px;
-        margin: 7px auto;
-        display: block;
-        background: transparent;
-      }
-
-      #logo::before {
-        left: 6px;
-        top: 10px;
-        font-size: 28px;
-      }
-
-      #logo::after,
-      #top-nav,
-      #nav-bar {
-        display: none;
-      }
-
-      #filter-box { display: block; }
-
-      #nav_menu { display: block; }
-
-      .post-box {
-        padding: 10px;
-      }
-
-      .post-title {
-        font-size: 18px;
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr;
-        gap: 5px 8px;
-      }
-
-      .form-grid label {
-        padding-top: 2px;
-      }
-
-      .actions {
-        justify-content: stretch;
-      }
-
-      .actions button {
-        flex: 1;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dang tin BDS</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            font-family: Tahoma, Arial, sans-serif;
+            font-size: 12px;
+            color: #222;
+            background: #fff;
+        }
+        
+        a {
+            color: #0b3fb3;
+            text-decoration: none;
+        }
+        
+        #header {
+            width: 1119px;
+            margin: 0 auto;
+            padding-top: 6px;
+            background: #fff;
+        }
+        
+        .navbar-toggle {
+            display: none;
+        }
+        
+        .icon-bar {
+            display: block;
+            width: 28px;
+            height: 3px;
+            margin: 5px 0;
+            background: #333;
+            border-radius: 2px;
+        }
+        
+        .mobile-filter-toggle {
+            display: none;
+        }
+        
+        .mobile-filter-toggle .filter-text {
+            display: none;
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        #logo {
+            display: inline-block;
+            width: 260px;
+            height: 56px;
+            background: linear-gradient(90deg, #fff, #f6f6f6);
+            position: relative;
+            vertical-align: middle;
+        }
+        
+        #logo::before {
+            content: "bonbanh.com";
+            position: absolute;
+            left: 4px;
+            top: 15px;
+            font-size: 34px;
+            line-height: 1;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: #121212;
+        }
+        
+        #logo::after {
+            content: "drive your dreams";
+            position: absolute;
+            right: -165px;
+            top: 21px;
+            color: #888;
+            font-size: 9px;
+            font-style: italic;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+        
+        #top-nav {
+            float: right;
+            margin-top: 2px;
+        }
+        
+        #top-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        #top-nav li {
+            padding: 0 13px;
+            border-right: 1px solid #bcbcbc;
+        }
+        
+        #top-nav li.ilast {
+            border-right: 0;
+            padding-right: 0;
+        }
+        
+        #top-nav a {
+            font-size: 13px;
+            color: #1c3db3;
+        }
+        
+        #nav-bar {
+            clear: both;
+            margin-top: 8px;
+            border: 1px solid #c4c4c4;
+            background: #ececec;
+            display: flex;
+        }
+        
+        .menu-item {
+            padding: 8px 17px;
+            border-right: 1px solid #c4c4c4;
+            color: #0b3fb3;
+            font-size: 14px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        
+        .menu-item:last-child {
+            border-right: 0;
+        }
+        
+        #nav_overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.25);
+            z-index: 998;
+        }
+        
+        #nav_menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            max-width: 82vw;
+            height: 100vh;
+            background: #f2f2e7;
+            border-right: 1px solid #d6d6d6;
+            transform: translateX(-100%);
+            transition: transform 0.25s ease;
+            z-index: 999;
+            overflow-y: auto;
+            display: none;
+        }
+        
+        #nav_menu.slide-active {
+            transform: translateX(0);
+        }
+        
+        #nav_menu .menu_content {
+            padding: 8px 0;
+        }
+        
+        #nav_menu .ul_menu {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        #nav_menu .ul_menu li {
+            border-bottom: 1px solid #dfdfcf;
+        }
+        
+        #nav_menu .ul_menu a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            color: #0f3fb1;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        #nav_menu .ul_menu i {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+            background: #0f3fb1;
+            display: inline-block;
+            flex: 0 0 auto;
+            opacity: 0.85;
+        }
+        
+        #filter-box {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 320px;
+            max-width: 92vw;
+            height: 100vh;
+            background: #fff;
+            z-index: 1001;
+            transform: translateX(100%);
+            transition: transform 0.25s ease;
+            border-left: 1px solid #d9d9d9;
+            display: none;
+            overflow: hidden;
+        }
+        
+        #filter-box.filter-active {
+            transform: translateX(0);
+        }
+        
+        #filter-box .nav-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 8px;
+            border-bottom: 1px solid #e2e2e2;
+            background: #fff;
+        }
+        
+        #filter-box .exp_title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #515151;
+        }
+        
+        #filter-box .cancel_filter {
+            border: 0;
+            background: #e24e3f;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 3px;
+        }
+        
+        #filter-box form {
+            height: calc(100vh - 48px);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        #filter-box .ul_filter {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            overflow-y: auto;
+            flex: 1;
+            background: #fff;
+        }
+        
+        #filter-box .filter_lv1 {
+            border-bottom: 1px solid #ececec;
+            padding: 10px 8px;
+        }
+        
+        #filter-box .f_search_text {
+            border: 1px solid #ddd;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #9aa0a6;
+        }
+        
+        #filter-box .f_search_text input {
+            border: 0;
+            outline: none;
+            width: 100%;
+            font-size: 12px;
+        }
+        
+        #filter-box .filter_label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: #3a3a3a;
+            font-weight: 700;
+        }
+        
+        #filter-box .name_changed,
+        #filter-box .name_changed_new {
+            font-size: 12px;
+            color: #6a6a6a;
+            font-weight: 400;
+        }
+        
+        #filter-box .slider {
+            margin-top: 8px;
+            position: relative;
+            height: 14px;
+        }
+        
+        #filter-box .slider::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 6px;
+            border-top: 3px solid #2f73dc;
+        }
+        
+        #filter-box .slider::after {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 1px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid #c7c7c7;
+            background: #fff;
+        }
+        
+        #filter-box .segmented {
+            margin-top: 8px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px;
+        }
+        
+        #filter-box .segmented label {
+            border: 1px solid #e3e3e3;
+            border-radius: 2px;
+            text-align: center;
+            padding: 6px 4px;
+            font-size: 11px;
+            color: #666;
+            background: #fbfbfb;
+        }
+        
+        #filter-box .segmented input {
+            display: none;
+        }
+        
+        #filter-box .fix-bottom {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-top: 1px solid #d8d8d8;
+            background: #2f73dc;
+        }
+        
+        #filter-box .fix-bottom button {
+            border: 0;
+            background: transparent;
+            color: #fff;
+            font-size: 11px;
+            font-weight: 700;
+            height: 38px;
+        }
+        
+        #filter-box .fix-bottom .button_b+.button_b {
+            border-left: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .page-wrap {
+            width: 1119px;
+            margin: 8px auto 16px;
+        }
+        
+        .post-box {
+            border: 1px solid #d5d5d5;
+            background: #fff;
+            padding: 12px;
+        }
+        
+        .post-title {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #1d1d1d;
+            line-height: 1.2;
+        }
+        
+        .post-sub {
+            margin: 0 0 14px;
+            color: #666;
+            font-size: 13px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 170px 1fr;
+            gap: 8px 12px;
+            align-items: start;
+        }
+        
+        .form-grid label {
+            font-weight: 700;
+            color: #333;
+            padding-top: 8px;
+        }
+        
+        .field {
+            min-width: 0;
+        }
+        
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        select {
+            width: 100%;
+            border: 1px solid #cfcfcf;
+            border-radius: 2px;
+            padding: 8px;
+            font-size: 13px;
+            font-family: Tahoma, Arial, sans-serif;
+            color: #222;
+            background: #fff;
+        }
+        
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+            line-height: 1.4;
+        }
+        
+        .hint {
+            margin-top: 4px;
+            font-size: 11px;
+            color: #666;
+        }
+        
+        .upload-area {
+            border: 1px dashed #b8c7e7;
+            background: #f7faff;
+            padding: 10px;
+        }
+        
+        .upload-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .upload-btn {
+            display: inline-block;
+            border: 1px solid #2f73dc;
+            color: #2f73dc;
+            background: #fff;
+            padding: 7px 10px;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .upload-btn.primary {
+            background: #2f73dc;
+            color: #fff;
+        }
+        
+        .upload-input {
+            display: none;
+        }
+        
+        .preview-list {
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 8px;
+        }
+        
+        .preview-item {
+            border: 1px solid #ddd;
+            padding: 4px;
+            background: #fff;
+        }
+        
+        .preview-item img {
+            width: 100%;
+            height: 90px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .preview-item .name {
+            margin-top: 4px;
+            font-size: 11px;
+            color: #444;
+            word-break: break-word;
+            line-height: 1.25;
+        }
+        
+        .actions {
+            margin-top: 14px;
+            display: flex;
+            gap: 8px;
+            justify-content: flex-end;
+        }
+        
+        .actions button {
+            border: 0;
+            padding: 10px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        
+        .btn-secondary {
+            color: #2f73dc;
+            border: 1px solid #2f73dc !important;
+            background: #fff;
+        }
+        
+        .btn-primary {
+            color: #fff;
+            background: #2f73dc;
+        }
+        
+        @media (max-width: 1120px) {
+            #header,
+            .page-wrap {
+                width: 100%;
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            #header {
+                position: relative;
+                padding: 0 6px;
+                width: 100%;
+                border-top: 1px solid #d8d8d8;
+                border-bottom: 1px solid #d8d8d8;
+            }
+            .navbar-toggle {
+                display: block;
+                position: absolute;
+                left: 10px;
+                top: 8px;
+                padding: 6px 4px;
+                z-index: 10;
+            }
+            .mobile-filter-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                flex-direction: column;
+                position: absolute;
+                right: 7px;
+                top: 6px;
+                width: 42px;
+                height: 34px;
+                color: #1f57d6;
+            }
+            .mobile-filter-toggle::before {
+                content: "";
+                position: absolute;
+                left: 11px;
+                top: 1px;
+                width: 12px;
+                height: 12px;
+                border: 2px solid #1f57d6;
+                border-radius: 50%;
+            }
+            .mobile-filter-toggle::after {
+                content: "";
+                position: absolute;
+                right: 10px;
+                top: 14px;
+                width: 7px;
+                height: 2px;
+                background: #1f57d6;
+                transform: rotate(45deg);
+                transform-origin: center;
+            }
+            .mobile-filter-toggle .filter-text {
+                display: block;
+                margin-top: 18px;
+                font-size: 10px;
+                line-height: 1;
+                font-weight: 700;
+                color: #1f57d6;
+            }
+            #logo {
+                width: 180px;
+                height: 44px;
+                margin: 7px auto;
+                display: block;
+                background: transparent;
+            }
+            #logo::before {
+                left: 6px;
+                top: 10px;
+                font-size: 28px;
+            }
+            #logo::after,
+            #top-nav,
+            #nav-bar {
+                display: none;
+            }
+            #filter-box {
+                display: block;
+            }
+            #nav_menu {
+                display: block;
+            }
+            .page-wrap {
+                font-size: 14px;
+            }
+            .post-box {
+                padding: 14px;
+            }
+            .post-title {
+                font-size: 22px;
+            }
+            .post-sub {
+                font-size: 15px;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 5px 8px;
+            }
+            .form-grid label {
+                padding-top: 2px;
+                font-size: 14px;
+            }
+            input[type="text"],
+            input[type="number"],
+            textarea,
+            select {
+                font-size: 15px;
+                padding: 11px;
+            }
+            .upload-btn {
+                font-size: 14px;
+                padding: 9px 12px;
+            }
+            .hint,
+            .preview-item .name {
+                font-size: 12px;
+            }
+            .actions {
+                justify-content: stretch;
+            }
+            .actions button {
+                flex: 1;
+                font-size: 15px;
+                padding: 12px 14px;
+            }
+            .preview-item img {
+                height: 102px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <div id="header">
-    <a class="navbar-toggle" href="javascript:void(0)" id="mobile-menu-toggle">
-      <span class="sr-only">Toggle navigation</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </a>
-    <a id="logo" href="index.html" title="bat dong san, mua ban bat dong san"></a>
-    <a href="javascript:void(0)" class="mobile-filter-toggle" id="mobile-filter-toggle" aria-label="Tìm nhà">
-      <span class="filter-text">Tìm nhà</span>
-    </a>
-    <div id="top-nav">
-      <ul>
-        <li><a rel="nofollow" href="#">Đăng ký</a></li>
-        <li><a rel="nofollow" href="#">Đăng nhập</a></li>
-        <li><a rel="nofollow" href="#">Hướng dẫn</a></li>
-        <li class="ilast"><a rel="nofollow" href="#">Liên hệ</a></li>
-      </ul>
+    <div id="header">
+        <a class="navbar-toggle" href="javascript:void(0)" id="mobile-menu-toggle">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </a>
+        <a id="logo" href="index.html" title="bat dong san, mua ban bat dong san"></a>
+        <a href="javascript:void(0)" class="mobile-filter-toggle" id="mobile-filter-toggle" aria-label="Tìm nhà">
+            <span class="filter-text">Tìm nhà</span>
+        </a>
+        <div id="top-nav">
+            <ul>
+                <li><a rel="nofollow" href="#">Đăng ký</a></li>
+                <li><a rel="nofollow" href="#">Đăng nhập</a></li>
+                <li><a rel="nofollow" href="#">Hướng dẫn</a></li>
+                <li class="ilast"><a rel="nofollow" href="#">Liên hệ</a></li>
+            </ul>
+        </div>
+        <div id="nav-bar">
+            <a class="menu-item" href="index.html">Trang chủ</a>
+            <a class="menu-item" href="index.html">Tìm mua BĐS</a>
+            <a class="menu-item" href="index.html">Môi giới</a>
+            <a class="menu-item" href="dang-tin-bds.html">Đăng tin BĐS</a>
+            <a class="menu-item" href="index.html">Giá BĐS</a>
+            <a class="menu-item" href="index.html">Cần mua/thuê</a>
+            <a class="menu-item" href="index.html">My BatDongSan</a>
+        </div>
     </div>
-    <div id="nav-bar">
-      <a class="menu-item" href="index.html">Trang chủ</a>
-      <a class="menu-item" href="index.html">Tìm mua BĐS</a>
-      <a class="menu-item" href="index.html">Môi giới</a>
-      <a class="menu-item" href="dang-tin-bds.html">Đăng tin BĐS</a>
-      <a class="menu-item" href="index.html">Giá BĐS</a>
-      <a class="menu-item" href="index.html">Cần mua/thuê</a>
-      <a class="menu-item" href="index.html">My BatDongSan</a>
+
+    <div id="nav_overlay"></div>
+    <div id="nav_menu" class="hidden-left panel-animate">
+        <div class="menu_content scrollPanel">
+            <ul class="ul_menu">
+                <li id="menu_index"><a href="index.html" title="mua ban nha dat"><i class="fa fa-home"></i>Tìm mua BĐS</a></li>
+                <li id="menu_dang-tin-ban-xe"><a href="dang-tin-bds.html"><i class="fa fa-plus-circle"></i>Đăng tin BĐS</a></li>
+                <li><a href="javascript:void(0)" onclick="openLogin()"><i class="fa fa-sign-in"></i>Đăng nhập / Đăng ký</a></li>
+                <li id="menu_gia-xe-oto"><a href="index.html"><i class="fa fa-line-chart"></i>Giá BĐS</a></li>
+                <li id="menu_salon-oto"><a href="index.html"><i class="fa fa-building"></i>Môi giới</a></li>
+                <li id="menu_tin-mua-xe"><a href="index.html"><i class="fa fa-tag"></i>Cần mua/thuê</a></li>
+                <li id="menu_tin-xe-da-luu"><a href="index.html"><i class="fa fa-floppy-o"></i>Tin đã lưu</a></li>
+                <li id="menu_lien-he"><a rel="nofollow" href="index.html"><i class="fa fa-envelope"></i>Liên hệ</a></li>
+                <li id="menu_change-view"><a rel="nofollow" href="index.html" class="change_desktop"><i class="fa fa-desktop"></i>Phiên bản máy tính</a></li>
+            </ul>
+        </div>
     </div>
-  </div>
 
-  <div id="nav_overlay"></div>
-  <div id="nav_menu" class="hidden-left panel-animate">
-    <div class="menu_content scrollPanel">
-      <ul class="ul_menu">
-        <li id="menu_index"><a href="index.html" title="mua ban nha dat"><i class="fa fa-home"></i>Tìm mua BĐS</a></li>
-        <li id="menu_dang-tin-ban-xe"><a href="dang-tin-bds.html"><i class="fa fa-plus-circle"></i>Đăng tin BĐS</a></li>
-        <li><a href="javascript:void(0)" onclick="openLogin()"><i class="fa fa-sign-in"></i>Đăng nhập / Đăng ký</a></li>
-        <li id="menu_gia-xe-oto"><a href="index.html"><i class="fa fa-line-chart"></i>Giá BĐS</a></li>
-        <li id="menu_salon-oto"><a href="index.html"><i class="fa fa-building"></i>Môi giới</a></li>
-        <li id="menu_tin-mua-xe"><a href="index.html"><i class="fa fa-tag"></i>Cần mua/thuê</a></li>
-        <li id="menu_tin-xe-da-luu"><a href="index.html"><i class="fa fa-floppy-o"></i>Tin đã lưu</a></li>
-        <li id="menu_lien-he"><a rel="nofollow" href="index.html"><i class="fa fa-envelope"></i>Liên hệ</a></li>
-        <li id="menu_change-view"><a rel="nofollow" href="index.html" class="change_desktop"><i class="fa fa-desktop"></i>Phiên bản máy tính</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div id="filter-box" class="panel-animate">
-    <div class="nav-head">
-      <a class="exp_title">Tìm kiếm BĐS</a>
-      <button class="cancel_filter" onclick="return openRightFilter()" name="cancel_filter">Hủy bỏ</button>
-      <ul class="ul_search"></ul>
-    </div>
-    <form id="form1" action="" method="post">
-      <input type="hidden" name="cur_page_ajax" id="cur_page_ajax" value="2">
-      <ul class="ul_filter scrollPanel">
-        <li class="filter_lv1" id="li_search_txt" style="display:block;">
-          <div class="f_search_text"><i class="fa fa-search"></i><input type="text" placeholder="Nhập từ khóa bạn cần tìm" name="search_txt" id="search_txt_mobile"></div>
-        </li>
-        <li class="filter_lv1" id="li_make"><a class="filter_label"><span>Loại hình</span><span class="name_changed">Tất cả</span></a></li>
-        <li class="filter_lv1 select_range" id="li_caryear"><a href="javascript:void(0)" class="filter_label"><span>Diện tích</span><span class="name_changed_new">Không giới hạn</span></a><div class="slider"></div></li>
-        <li class="filter_lv1 select_range" id="li_price"><a href="javascript:void(0)" class="filter_label"><span>Mức giá</span><span class="name_changed_new">Không giới hạn</span></a><div class="slider"></div></li>
-        <li class="filter_lv1 has_segmented" id="li_carstatus"><a href="javascript:void(0)" class="filter_label"><span>Nhu cầu</span></a><div class="segmented"><label><input type="radio" name="sgm_carstatus" value="1">Cần bán</label><label><input type="radio" name="sgm_carstatus" value="2">Cho thuê</label></div></li>
-      </ul>
-      <div class="fix-bottom"><div class="button_b"><button type="button" name="btn_reset" id="btn_reset">Chọn lại</button></div><div class="button_b"><button type="button" name="btn_search" id="btn_search" class="act-button">Hiển thị tin</button></div></div>
-    </form>
-  </div>
-
-  <div class="page-wrap">
-    <div class="post-box">
-      <h1 class="post-title">Đăng tin BĐS</h1>
-      <p class="post-sub">Nhập đầy đủ thông tin để người mua dễ liên hệ và tìm thấy tin của bạn.</p>
-
-      <form id="post-form">
-        <div class="form-grid">
-          <label for="title">Tiêu đề</label>
-          <div class="field">
-            <input id="title" name="title" type="text" placeholder="Ví dụ: Bán căn hộ 2PN quận 7 view sông" required>
-          </div>
-
-          <label for="price">Giá</label>
-          <div class="field">
-            <input id="price" name="price" type="text" placeholder="Ví dụ: 2.35 tỷ hoặc 12 triệu/tháng" required>
-          </div>
-
-          <label for="content">Nội dung</label>
-          <div class="field">
-            <textarea id="content" name="content" placeholder="Mô tả chi tiết bất động sản: diện tích, số phòng, pháp lý, tiện ích..." required></textarea>
-            <div class="hint">Nội dung rõ ràng sẽ giúp tin đăng được duyệt nhanh hơn.</div>
-          </div>
-
-          <label for="poster">Người đăng</label>
-          <div class="field">
-            <input id="poster" name="poster" type="text" placeholder="Họ và tên" required>
-          </div>
-
-          <label for="location">Vị trí</label>
-          <div class="field">
-            <input id="location" name="location" type="text" placeholder="Ví dụ: Quận 7, TP HCM" required>
-          </div>
-
-          <label>Ảnh</label>
-          <div class="field upload-area">
-            <div class="upload-buttons">
-              <label for="upload-device" class="upload-btn primary">Upload ảnh từ máy tính/điện thoại</label>
-              <label for="upload-camera" class="upload-btn">Chụp ảnh bằng điện thoại</label>
+    <div id="filter-box" class="panel-animate">
+        <div class="nav-head">
+            <a class="exp_title">Tìm kiếm BĐS</a>
+            <button class="cancel_filter" onclick="return openRightFilter()" name="cancel_filter">Hủy bỏ</button>
+            <ul class="ul_search"></ul>
+        </div>
+        <form id="form1" action="" method="post">
+            <input type="hidden" name="cur_page_ajax" id="cur_page_ajax" value="2">
+            <ul class="ul_filter scrollPanel">
+                <li class="filter_lv1" id="li_search_txt" style="display:block;">
+                    <div class="f_search_text"><i class="fa fa-search"></i><input type="text" placeholder="Nhập từ khóa bạn cần tìm" name="search_txt" id="search_txt_mobile"></div>
+                </li>
+                <li class="filter_lv1" id="li_make"><a class="filter_label"><span>Loại hình</span><span class="name_changed">Tất cả</span></a></li>
+                <li class="filter_lv1 select_range" id="li_caryear"><a href="javascript:void(0)" class="filter_label"><span>Diện tích</span><span class="name_changed_new">Không giới hạn</span></a>
+                    <div class="slider"></div>
+                </li>
+                <li class="filter_lv1 select_range" id="li_price"><a href="javascript:void(0)" class="filter_label"><span>Mức giá</span><span class="name_changed_new">Không giới hạn</span></a>
+                    <div class="slider"></div>
+                </li>
+                <li class="filter_lv1 has_segmented" id="li_carstatus"><a href="javascript:void(0)" class="filter_label"><span>Nhu cầu</span></a>
+                    <div class="segmented"><label><input type="radio" name="sgm_carstatus" value="1">Cần bán</label><label><input type="radio" name="sgm_carstatus" value="2">Cho thuê</label></div>
+                </li>
+            </ul>
+            <div class="fix-bottom">
+                <div class="button_b"><button type="button" name="btn_reset" id="btn_reset">Chọn lại</button></div>
+                <div class="button_b"><button type="button" name="btn_search" id="btn_search" class="act-button">Hiển thị tin</button></div>
             </div>
-            <input id="upload-device" class="upload-input" type="file" accept="image/*" multiple>
-            <input id="upload-camera" class="upload-input" type="file" accept="image/*" capture="environment" multiple>
-            <div class="hint">Trên điện thoại, nút chụp ảnh sẽ mở camera. Trên máy tính, bạn có thể chọn ảnh từ thư mục.</div>
-            <div id="preview-list" class="preview-list"></div>
-          </div>
-        </div>
-
-        <div class="actions">
-          <button class="btn-secondary" type="reset">Nhập lại</button>
-          <button class="btn-primary" type="submit">Đăng tin</button>
-        </div>
-      </form>
+        </form>
     </div>
-  </div>
 
-  <script>
-    (function () {
-      var uploadDevice = document.getElementById("upload-device");
-      var uploadCamera = document.getElementById("upload-camera");
-      var previewList = document.getElementById("preview-list");
-      var form = document.getElementById("post-form");
+    <div class="page-wrap">
+        <div class="post-box">
+            <h1 class="post-title">Đăng tin BĐS</h1>
+            <p class="post-sub">Nhập đầy đủ thông tin để người mua dễ liên hệ và tìm thấy tin của bạn.</p>
 
-      function renderPreviews(fileList) {
-        if (!fileList || !fileList.length) {
-          return;
-        }
+            <form id="post-form">
+                <div class="form-grid">
+                    <label for="title">Tiêu đề</label>
+                    <div class="field">
+                        <input id="title" name="title" type="text" placeholder="Ví dụ: Bán căn hộ 2PN quận 7 view sông" required>
+                    </div>
 
-        Array.prototype.forEach.call(fileList, function (file) {
-          if (!file.type || file.type.indexOf("image/") !== 0) {
-            return;
-          }
+                    <label for="price">Giá</label>
+                    <div class="field">
+                        <input id="price" name="price" type="text" placeholder="Ví dụ: 2.35 tỷ hoặc 12 triệu/tháng" required>
+                    </div>
 
-          var item = document.createElement("div");
-          item.className = "preview-item";
+                    <label for="content">Nội dung</label>
+                    <div class="field">
+                        <textarea id="content" name="content" placeholder="Mô tả chi tiết bất động sản: diện tích, số phòng, pháp lý, tiện ích..." required></textarea>
+                        <div class="hint">Nội dung rõ ràng sẽ giúp tin đăng được duyệt nhanh hơn.</div>
+                    </div>
 
-          var img = document.createElement("img");
-          img.alt = file.name;
-          img.src = URL.createObjectURL(file);
-          img.onload = function () {
-            URL.revokeObjectURL(img.src);
-          };
+                    <label for="poster">Người đăng</label>
+                    <div class="field">
+                        <input id="poster" name="poster" type="text" placeholder="Họ và tên" required>
+                    </div>
 
-          var name = document.createElement("div");
-          name.className = "name";
-          name.textContent = file.name;
+                    <label for="location">Vị trí</label>
+                    <div class="field">
+                        <input id="location" name="location" type="text" placeholder="Ví dụ: Quận 7, TP HCM" required>
+                    </div>
 
-          item.appendChild(img);
-          item.appendChild(name);
-          previewList.appendChild(item);
-        });
-      }
+                    <label>Ảnh</label>
+                    <div class="field upload-area">
+                        <div class="upload-buttons">
+                            <label for="upload-device" class="upload-btn primary">Upload ảnh từ máy tính/điện thoại</label>
+                            <label for="upload-camera" class="upload-btn">Chụp ảnh bằng điện thoại</label>
+                        </div>
+                        <input id="upload-device" class="upload-input" type="file" accept="image/*" multiple>
+                        <input id="upload-camera" class="upload-input" type="file" accept="image/*" capture="environment" multiple>
+                        <div class="hint">Trên điện thoại, nút chụp ảnh sẽ mở camera. Trên máy tính, bạn có thể chọn ảnh từ thư mục.</div>
+                        <div id="preview-list" class="preview-list"></div>
+                    </div>
+                </div>
 
-      if (uploadDevice) {
-        uploadDevice.addEventListener("change", function (e) {
-          renderPreviews(e.target.files);
-        });
-      }
+                <div class="actions">
+                    <button class="btn-secondary" type="reset">Nhập lại</button>
+                    <button class="btn-primary" type="submit">Đăng tin</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-      if (uploadCamera) {
-        uploadCamera.addEventListener("change", function (e) {
-          renderPreviews(e.target.files);
-        });
-      }
+    <script>
+        (function() {
+            var uploadDevice = document.getElementById("upload-device");
+            var uploadCamera = document.getElementById("upload-camera");
+            var previewList = document.getElementById("preview-list");
+            var form = document.getElementById("post-form");
 
-      if (form) {
-        form.addEventListener("reset", function () {
-          window.setTimeout(function () {
-            previewList.innerHTML = "";
-          }, 0);
-        });
+            function renderPreviews(fileList) {
+                if (!fileList || !fileList.length) {
+                    return;
+                }
 
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          alert("Đã ghi nhận thông tin đăng tin BĐS. Bạn có thể tích hợp API lưu dữ liệu ở bước tiếp theo.");
-        });
-      }
-    })();
-  </script>
-  <script>
-    (function () {
-      var toggleBtn = document.getElementById("mobile-menu-toggle");
-      var filterBtn = document.getElementById("mobile-filter-toggle");
-      var menu = document.getElementById("nav_menu");
-      var filterBox = document.getElementById("filter-box");
-      var overlay = document.getElementById("nav_overlay");
+                Array.prototype.forEach.call(fileList, function(file) {
+                    if (!file.type || file.type.indexOf("image/") !== 0) {
+                        return;
+                    }
 
-      function isMobile() {
-        return window.matchMedia("(max-width: 768px)").matches;
-      }
+                    var item = document.createElement("div");
+                    item.className = "preview-item";
 
-      function openMenu() {
-        if (!isMobile() || !menu || !overlay) {
-          return;
-        }
-        closeFilter();
-        menu.classList.add("slide-active");
-        overlay.style.display = "block";
-        document.body.style.overflow = "hidden";
-      }
+                    var img = document.createElement("img");
+                    img.alt = file.name;
+                    img.src = URL.createObjectURL(file);
+                    img.onload = function() {
+                        URL.revokeObjectURL(img.src);
+                    };
 
-      function closeMenu() {
-        if (!menu || !overlay) {
-          return;
-        }
-        menu.classList.remove("slide-active");
-        if (!filterBox || !filterBox.classList.contains("filter-active")) {
-          overlay.style.display = "none";
-          document.body.style.overflow = "";
-        }
-      }
+                    var name = document.createElement("div");
+                    name.className = "name";
+                    name.textContent = file.name;
 
-      function openFilter() {
-        if (!isMobile() || !filterBox || !overlay) {
-          return;
-        }
-        closeMenu();
-        filterBox.classList.add("filter-active");
-        overlay.style.display = "block";
-        document.body.style.overflow = "hidden";
-      }
+                    item.appendChild(img);
+                    item.appendChild(name);
+                    previewList.appendChild(item);
+                });
+            }
 
-      function closeFilter() {
-        if (!filterBox || !overlay) {
-          return;
-        }
-        filterBox.classList.remove("filter-active");
-        if (!menu || !menu.classList.contains("slide-active")) {
-          overlay.style.display = "none";
-          document.body.style.overflow = "";
-        }
-      }
+            if (uploadDevice) {
+                uploadDevice.addEventListener("change", function(e) {
+                    renderPreviews(e.target.files);
+                });
+            }
 
-      window.openRightFilter = function () {
-        if (!filterBox) {
-          return false;
-        }
-        if (filterBox.classList.contains("filter-active")) {
-          closeFilter();
-        } else {
-          openFilter();
-        }
-        return false;
-      };
+            if (uploadCamera) {
+                uploadCamera.addEventListener("change", function(e) {
+                    renderPreviews(e.target.files);
+                });
+            }
 
-      function closePanels() {
-        closeMenu();
-        closeFilter();
-      }
+            if (form) {
+                form.addEventListener("reset", function() {
+                    window.setTimeout(function() {
+                        previewList.innerHTML = "";
+                    }, 0);
+                });
 
-      window.openLogin = window.openLogin || function () {
-        closePanels();
-      };
+                form.addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    alert("Đã ghi nhận thông tin đăng tin BĐS. Bạn có thể tích hợp API lưu dữ liệu ở bước tiếp theo.");
+                });
+            }
+        })();
+    </script>
+    <script>
+        (function() {
+            var toggleBtn = document.getElementById("mobile-menu-toggle");
+            var filterBtn = document.getElementById("mobile-filter-toggle");
+            var menu = document.getElementById("nav_menu");
+            var filterBox = document.getElementById("filter-box");
+            var overlay = document.getElementById("nav_overlay");
 
-      if (filterBtn) {
-        filterBtn.addEventListener("click", function (e) {
-          e.preventDefault();
-          window.openRightFilter();
-        });
-      }
+            function isMobile() {
+                return window.matchMedia("(max-width: 768px)").matches;
+            }
 
-      if (filterBox) {
-        filterBox.addEventListener("click", function (e) {
-          var target = e.target;
-          if (target && target.closest(".cancel_filter")) {
-            e.preventDefault();
-            closeFilter();
-          }
-        });
-      }
+            function openMenu() {
+                if (!isMobile() || !menu || !overlay) {
+                    return;
+                }
+                closeFilter();
+                menu.classList.add("slide-active");
+                overlay.style.display = "block";
+                document.body.style.overflow = "hidden";
+            }
 
-      if (overlay) {
-        overlay.addEventListener("click", closePanels);
-      }
+            function closeMenu() {
+                if (!menu || !overlay) {
+                    return;
+                }
+                menu.classList.remove("slide-active");
+                if (!filterBox || !filterBox.classList.contains("filter-active")) {
+                    overlay.style.display = "none";
+                    document.body.style.overflow = "";
+                }
+            }
 
-      if (menu) {
-        menu.addEventListener("click", function (e) {
-          var target = e.target;
-          if (target && target.closest("a")) {
-            closeMenu();
-          }
-        });
-      }
+            function openFilter() {
+                if (!isMobile() || !filterBox || !overlay) {
+                    return;
+                }
+                closeMenu();
+                filterBox.classList.add("filter-active");
+                overlay.style.display = "block";
+                document.body.style.overflow = "hidden";
+            }
 
-      if (toggleBtn) {
-        toggleBtn.addEventListener("click", function (e) {
-          e.preventDefault();
-          if (menu.classList.contains("slide-active")) {
-            closeMenu();
-          } else {
-            openMenu();
-          }
-        });
-      }
+            function closeFilter() {
+                if (!filterBox || !overlay) {
+                    return;
+                }
+                filterBox.classList.remove("filter-active");
+                if (!menu || !menu.classList.contains("slide-active")) {
+                    overlay.style.display = "none";
+                    document.body.style.overflow = "";
+                }
+            }
 
-      window.addEventListener("resize", function () {
-        if (!isMobile()) {
-          closePanels();
-        }
-      });
-    })();
-  </script>
+            window.openRightFilter = function() {
+                if (!filterBox) {
+                    return false;
+                }
+                if (filterBox.classList.contains("filter-active")) {
+                    closeFilter();
+                } else {
+                    openFilter();
+                }
+                return false;
+            };
+
+            function closePanels() {
+                closeMenu();
+                closeFilter();
+            }
+
+            window.openLogin = window.openLogin || function() {
+                closePanels();
+            };
+
+            if (filterBtn) {
+                filterBtn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    window.openRightFilter();
+                });
+            }
+
+            if (filterBox) {
+                filterBox.addEventListener("click", function(e) {
+                    var target = e.target;
+                    if (target && target.closest(".cancel_filter")) {
+                        e.preventDefault();
+                        closeFilter();
+                    }
+                });
+            }
+
+            if (overlay) {
+                overlay.addEventListener("click", closePanels);
+            }
+
+            if (menu) {
+                menu.addEventListener("click", function(e) {
+                    var target = e.target;
+                    if (target && target.closest("a")) {
+                        closeMenu();
+                    }
+                });
+            }
+
+            if (toggleBtn) {
+                toggleBtn.addEventListener("click", function(e) {
+                    e.preventDefault();
+                    if (menu.classList.contains("slide-active")) {
+                        closeMenu();
+                    } else {
+                        openMenu();
+                    }
+                });
+            }
+
+            window.addEventListener("resize", function() {
+                if (!isMobile()) {
+                    closePanels();
+                }
+            });
+        })();
+    </script>
 </body>
+
 </html>
