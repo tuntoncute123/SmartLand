@@ -1,0 +1,1137 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chi tiet bat dong san</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      font-size: 12px;
+      color: #222;
+      background: #fff;
+    }
+    a { color: #0b3fb3; text-decoration: none; }
+
+    #header {
+      width: 1119px;
+      margin: 0 auto;
+      padding-top: 6px;
+      background: #fff;
+    }
+
+    .navbar-toggle { display: none; }
+
+    .icon-bar {
+      display: block;
+      width: 28px;
+      height: 3px;
+      margin: 5px 0;
+      background: #333;
+      border-radius: 2px;
+    }
+
+    .mobile-filter-toggle { display: none; }
+
+    .mobile-filter-toggle .filter-text { display: none; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    #logo {
+      display: inline-block;
+      width: 260px;
+      height: 56px;
+      background: linear-gradient(90deg, #fff, #f6f6f6);
+      position: relative;
+      vertical-align: middle;
+    }
+
+    #logo::before {
+      content: "bonbanh.com";
+      position: absolute;
+      left: 4px;
+      top: 15px;
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: #121212;
+    }
+
+    #logo::after {
+      content: "drive your dreams";
+      position: absolute;
+      right: -165px;
+      top: 21px;
+      color: #888;
+      font-size: 9px;
+      font-style: italic;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    #top-nav {
+      float: right;
+      margin-top: 2px;
+    }
+
+    #top-nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+    }
+
+    #top-nav li {
+      padding: 0 13px;
+      border-right: 1px solid #bcbcbc;
+    }
+
+    #top-nav li.ilast {
+      border-right: 0;
+      padding-right: 0;
+    }
+
+    #top-nav a {
+      font-size: 13px;
+      color: #1c3db3;
+    }
+
+    #nav-bar {
+      clear: both;
+      margin-top: 8px;
+      border: 1px solid #c4c4c4;
+      background: #ececec;
+      display: flex;
+    }
+
+    .menu-item {
+      padding: 8px 17px;
+      border-right: 1px solid #c4c4c4;
+      color: #0b3fb3;
+      font-size: 14px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .menu-item:last-child { border-right: 0; }
+
+    #nav_overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.25);
+      z-index: 998;
+    }
+
+    #nav_menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 250px;
+      max-width: 82vw;
+      height: 100vh;
+      background: #f2f2e7;
+      border-right: 1px solid #d6d6d6;
+      transform: translateX(-100%);
+      transition: transform 0.25s ease;
+      z-index: 999;
+      overflow-y: auto;
+      display: none;
+    }
+
+    #nav_menu.slide-active {
+      transform: translateX(0);
+    }
+
+    #nav_menu .menu_content {
+      padding: 8px 0;
+    }
+
+    #nav_menu .ul_menu {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    #nav_menu .ul_menu li {
+      border-bottom: 1px solid #dfdfcf;
+    }
+
+    #nav_menu .ul_menu a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      color: #0f3fb1;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    #nav_menu .ul_menu i {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      background: #0f3fb1;
+      display: inline-block;
+      flex: 0 0 auto;
+      opacity: 0.85;
+    }
+
+    #filter-box {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 320px;
+      max-width: 92vw;
+      height: 100vh;
+      background: #fff;
+      z-index: 1001;
+      transform: translateX(100%);
+      transition: transform 0.25s ease;
+      border-left: 1px solid #d9d9d9;
+      display: none;
+      overflow: hidden;
+    }
+
+    #filter-box.filter-active {
+      transform: translateX(0);
+    }
+
+    #filter-box .nav-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 8px;
+      border-bottom: 1px solid #e2e2e2;
+      background: #fff;
+    }
+
+    #filter-box .exp_title {
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #515151;
+    }
+
+    #filter-box .cancel_filter {
+      border: 0;
+      background: #e24e3f;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 3px;
+    }
+
+    #filter-box form {
+      height: calc(100vh - 48px);
+      display: flex;
+      flex-direction: column;
+    }
+
+    #filter-box .ul_filter {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      overflow-y: auto;
+      flex: 1;
+      background: #fff;
+    }
+
+    #filter-box .filter_lv1 {
+      border-bottom: 1px solid #ececec;
+      padding: 10px 8px;
+    }
+
+    #filter-box .f_search_text {
+      border: 1px solid #ddd;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #9aa0a6;
+    }
+
+    #filter-box .f_search_text input {
+      border: 0;
+      outline: none;
+      width: 100%;
+      font-size: 12px;
+    }
+
+    #filter-box .filter_label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: #3a3a3a;
+      font-weight: 700;
+    }
+
+    #filter-box .name_changed,
+    #filter-box .name_changed_new {
+      font-size: 12px;
+      color: #6a6a6a;
+      font-weight: 400;
+    }
+
+    #filter-box .slider {
+      margin-top: 8px;
+      position: relative;
+      height: 14px;
+    }
+
+    #filter-box .slider::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 6px;
+      border-top: 3px solid #2f73dc;
+    }
+
+    #filter-box .slider::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 1px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1px solid #c7c7c7;
+      background: #fff;
+    }
+
+    #filter-box .segmented {
+      margin-top: 8px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+
+    #filter-box .segmented label {
+      border: 1px solid #e3e3e3;
+      border-radius: 2px;
+      text-align: center;
+      padding: 6px 4px;
+      font-size: 11px;
+      color: #666;
+      background: #fbfbfb;
+    }
+
+    #filter-box .segmented input {
+      display: none;
+    }
+
+    #filter-box .fix-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid #d8d8d8;
+      background: #2f73dc;
+    }
+
+    #filter-box .fix-bottom button {
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      height: 38px;
+    }
+
+    #filter-box .fix-bottom .button_b + .button_b {
+      border-left: 1px solid rgba(255, 255, 255, 0.4);
+    }
+
+    #main-content.car_detail {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 8px;
+    }
+
+    .dlg-box { display: none; }
+    .item_ads { min-height: 8px; }
+
+    #status-header {
+      margin: 4px 0 8px;
+    }
+
+    #status-header .breadcrum {
+      color: #3553af;
+      line-height: 1.5;
+      margin-bottom: 4px;
+    }
+
+    #status-header h1 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 700;
+      color: #222;
+    }
+
+    #img_container {
+      border: 1px solid #d7d7d7;
+      background: #fff;
+    }
+
+    #groupImages { position: relative; }
+
+    .img_vertical img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .list_o_imgs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-top: 2px;
+    }
+
+    .list_o_imgs img {
+      width: 100%;
+      height: 72px;
+      object-fit: cover;
+      display: block;
+    }
+
+    #remain_imgs {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .price_box {
+      border: 1px solid #d7d7d7;
+      border-top: 0;
+      background: #fffde7;
+      text-align: center;
+      padding: 6px;
+      color: #996c00;
+    }
+
+    .price_box h3 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .price_box b { color: #128a00; }
+
+    .tabbertab_detail {
+      border: 1px solid #d7d7d7;
+      border-top: 0;
+      background: #fff;
+      padding: 8px;
+    }
+
+    .tabbertab_detail h2 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: #1d1d1d;
+      border-bottom: 1px solid #e3e3e3;
+      padding-bottom: 5px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 2px 0;
+    }
+
+    .col,
+    .col2 {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      align-items: start;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    .label {
+      color: #666;
+      white-space: nowrap;
+    }
+
+    .txt_input,
+    .inputbox {
+      color: #1b1b1b;
+      min-width: 0;
+    }
+
+    .inp {
+      color: #0a3bba;
+      word-break: break-word;
+    }
+
+    .car_des h3 {
+      margin: 10px 0 4px;
+      font-size: 14px;
+      color: #222;
+    }
+
+    .des_txt {
+      line-height: 1.45;
+      color: #333;
+    }
+
+    .contact_box {
+      border: 1px solid #d7d7d7;
+      border-top: 0;
+      padding: 8px;
+      background: #fff;
+    }
+
+    .contact_box h3 {
+      margin: 0 0 5px;
+      font-size: 14px;
+    }
+
+    .contact_info { line-height: 1.6; }
+
+    .estimate_cost {
+      border: 1px solid #d7d7d7;
+      border-top: 0;
+      background: #f5f9ff;
+      padding: 8px;
+      color: #2f62cf;
+      font-weight: 700;
+    }
+
+    .short_link {
+      border: 1px solid #dedede;
+      width: 100%;
+      padding: 10px 6px;
+      margin: 14px 0;
+      background: #fff;
+    }
+
+    .short_link label {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .short_link ul {
+      margin: 0;
+      padding-left: 16px;
+    }
+
+    .short_link li { margin-bottom: 3px; }
+
+    .share_detail {
+      border: 1px solid #e4e4e4;
+      background: #fff;
+      padding: 8px;
+    }
+
+    .share_detail ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .share_detail img {
+      width: 24px;
+      height: 24px;
+    }
+
+    .util {
+      border: 1px solid #e4e4e4;
+      border-top: 0;
+      padding: 8px;
+      background: #fff;
+      display: grid;
+      gap: 6px;
+    }
+
+    #other_cars {
+      margin-top: 14px;
+      border: 1px solid #e4e4e4;
+      background: #fff;
+      padding: 8px;
+    }
+
+    #other_cars h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+    }
+
+    .related-scroll {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 190px;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .regular_box {
+      border: 1px solid #d9d9d9;
+      box-shadow: 0 0 4px #d0d0d0;
+      position: relative;
+      background: #fff;
+      min-height: 184px;
+    }
+
+    .detail_img {
+      height: 84px;
+      display: block;
+      overflow: hidden;
+    }
+
+    .detail_img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .o_price {
+      display: inline-block;
+      margin: 4px;
+      padding: 1px 4px;
+      font-weight: 700;
+      color: green;
+      background: #eee;
+      font-size: 13px;
+    }
+
+    .detail_title h4 {
+      margin: 4px;
+      font-size: 12px;
+      line-height: 1.35;
+      color: #222;
+    }
+
+    .o_other_info {
+      margin: 4px;
+      color: #666;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .o_city {
+      display: block;
+      text-align: center;
+      margin: 4px;
+      color: #555;
+      font-size: 11px;
+    }
+
+    @media (max-width: 768px) {
+      #header {
+        position: relative;
+        padding: 0 6px;
+        width: 100%;
+        border-top: 1px solid #d8d8d8;
+        border-bottom: 1px solid #d8d8d8;
+      }
+
+      .navbar-toggle {
+        display: block;
+        position: absolute;
+        left: 10px;
+        top: 8px;
+        padding: 6px 4px;
+      }
+
+      .mobile-filter-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        position: absolute;
+        right: 7px;
+        top: 6px;
+        width: 42px;
+        height: 34px;
+        color: #1f57d6;
+      }
+
+      .mobile-filter-toggle::before {
+        content: "";
+        position: absolute;
+        left: 11px;
+        top: 1px;
+        width: 12px;
+        height: 12px;
+        border: 2px solid #1f57d6;
+        border-radius: 50%;
+      }
+
+      .mobile-filter-toggle::after {
+        content: "";
+        position: absolute;
+        right: 10px;
+        top: 14px;
+        width: 7px;
+        height: 2px;
+        background: #1f57d6;
+        transform: rotate(45deg);
+        transform-origin: center;
+      }
+
+      .mobile-filter-toggle .filter-text {
+        display: block;
+        margin-top: 18px;
+        font-size: 10px;
+        line-height: 1;
+        font-weight: 700;
+        color: #1f57d6;
+      }
+
+      #logo {
+        display: block;
+        width: 180px;
+        height: 44px;
+        margin: 7px auto;
+        background: transparent;
+      }
+
+      #logo::before {
+        left: 6px;
+        top: 10px;
+        font-size: 28px;
+      }
+
+      #logo::after { display: none; }
+
+      #top-nav,
+      #nav-bar,
+      #T_A { display: none; }
+
+      #filter-box { display: block; }
+
+      #nav_menu { display: block; }
+
+      #main-content.car_detail {
+        padding: 6px;
+      }
+
+      #status-header h1 {
+        font-size: 15px;
+      }
+
+      .img_vertical img {
+        height: 200px;
+      }
+
+      .list_o_imgs img {
+        height: 60px;
+      }
+
+      .price_box h3 {
+        font-size: 18px;
+      }
+
+      .row {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .col,
+      .col2 {
+        grid-template-columns: 86px 1fr;
+      }
+
+      .related-scroll {
+        grid-auto-columns: 165px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="header">
+    <a class="navbar-toggle" href="javascript:void(0)" id="mobile-menu-toggle">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
+    <a id="logo" href="https://bonbanh.com/" title="bat dong san, mua ban bat dong san"></a>
+    <a href="javascript:void(0)" class="mobile-filter-toggle" id="mobile-filter-toggle" aria-label="Tìm nhà">
+      <span class="filter-text">Tìm nhà</span>
+    </a>
+    <div id="top-nav" style="width:325px">
+      <ul>
+        <li><a rel="nofollow" href="dang-ky-thanh-vien/">Đăng ký</a></li>
+        <li><a rel="nofollow" href="thanh-vien/">Đăng nhập</a></li>
+        <li><a rel="nofollow" href="gioi-thieu/">Hướng dẫn</a></li>
+        <li class="ilast"><a rel="nofollow" href="lien-he/">Liên hệ</a></li>
+      </ul>
+    </div>
+    <div id="T_A" class="div_banner" style="float:right;margin:5px 2px 5px;clear: none;"></div>
+    <div id="nav-bar">
+      <a class="menu-item" href="index.html" title="mua ban bat dong san">Trang chủ</a>
+      <a class="menu-item" href="index.html" title="mua ban nha dat">Tìm mua BĐS</a>
+      <a class="menu-item" href="index.html" title="Môi giới / sàn giao dịch">Môi giới</a>
+      <a class="menu-item" href="dang-tin-bds.html" title="Đăng tin bất động sản">Đăng tin BĐS</a>
+      <a class="menu-item" href="index.html" title="Giá bất động sản">Giá BĐS</a>
+      <a class="menu-item" href="index.html" title="Các tin cần mua thuê">Cần mua/thuê</a>
+      <a class="menu-item" href="index.html" title="Quản lý tin đăng của bạn...">My BatDongSan</a>
+    </div>
+  </div>
+
+  <div id="nav_overlay"></div>
+  <div id="nav_menu" class="hidden-left panel-animate">
+    <div class="menu_content scrollPanel">
+      <ul class="ul_menu">
+        <li id="menu_index"><a href="index.html" title="mua ban nha dat"><i class="fa fa-home"></i>Tìm mua BĐS</a></li>
+        <li id="menu_dang-tin-ban-xe"><a href="dang-tin-bds.html"><i class="fa fa-plus-circle"></i>Đăng tin BĐS</a></li>
+        <li><a href="javascript:void(0)" onclick="openLogin()"><i class="fa fa-sign-in"></i>Đăng nhập / Đăng ký</a></li>
+        <li id="menu_gia-xe-oto"><a href="index.html"><i class="fa fa-line-chart"></i>Giá BĐS</a></li>
+        <li id="menu_salon-oto"><a href="index.html"><i class="fa fa-building"></i>Môi giới</a></li>
+        <li id="menu_tin-mua-xe"><a href="index.html"><i class="fa fa-tag"></i>Cần mua/thuê</a></li>
+        <li id="menu_tin-xe-da-luu"><a href="index.html"><i class="fa fa-floppy-o"></i>Tin đã lưu</a></li>
+        <li id="menu_lien-he"><a rel="nofollow" href="index.html"><i class="fa fa-envelope"></i>Liên hệ</a></li>
+        <li id="menu_change-view"><a rel="nofollow" href="index.html" class="change_desktop"><i class="fa fa-desktop"></i>Phiên bản máy tính</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="filter-box" class="panel-animate">
+    <div class="nav-head">
+      <a class="exp_title">Tìm kiếm BĐS</a>
+      <button class="cancel_filter" onclick="return openRightFilter()" name="cancel_filter">Hủy bỏ</button>
+      <ul class="ul_search"></ul>
+    </div>
+    <form id="form1" action="" method="post">
+      <input type="hidden" name="cur_page_ajax" id="cur_page_ajax" value="2">
+      <ul class="ul_filter scrollPanel">
+        <li class="filter_lv1" id="li_search_txt" style="display:block;">
+          <div class="f_search_text"><i class="fa fa-search"></i><input type="text" placeholder="Nhập từ khóa bạn cần tìm" name="search_txt" id="search_txt_mobile"></div>
+        </li>
+        <li class="filter_lv1" id="li_make"><a class="filter_label"><span>Loại hình</span><span class="name_changed">Tất cả</span></a></li>
+        <li class="filter_lv1 select_range" id="li_caryear"><a href="javascript:void(0)" class="filter_label"><span>Diện tích</span><span class="name_changed_new">Không giới hạn</span></a><div class="slider"></div></li>
+        <li class="filter_lv1 select_range" id="li_price"><a href="javascript:void(0)" class="filter_label"><span>Mức giá</span><span class="name_changed_new">Không giới hạn</span></a><div class="slider"></div></li>
+        <li class="filter_lv1 has_segmented" id="li_carstatus"><a href="javascript:void(0)" class="filter_label"><span>Nhu cầu</span></a><div class="segmented"><label><input type="radio" name="sgm_carstatus" value="1">Cần bán</label><label><input type="radio" name="sgm_carstatus" value="2">Cho thuê</label></div></li>
+      </ul>
+      <div class="fix-bottom"><div class="button_b"><button type="button" name="btn_reset" id="btn_reset">Chọn lại</button></div><div class="button_b"><button type="button" name="btn_search" id="btn_search" class="act-button">Hiển thị tin</button></div></div>
+    </form>
+  </div>
+
+  <div id="main-content" class="car_detail">
+    <div id="send-msg-dlg" style="display:none" class="dlg-box"></div>
+    <div id="saved-msg-dlg" style="display:none" class="dlg-box"></div>
+    <div id="report-msg-dlg" style="display:none" class="dlg-box"></div>
+
+    <div id="C_TOP_MA" class="item_ads"></div>
+
+    <div id="status-header" itemscope itemtype="http://schema.org/BreadcrumbList">
+      <div class="breadcrum">
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <a itemprop="item" title="mua ban bat dong san" href="index.html">
+            <span itemprop="name">Trang chu</span>
+            <meta itemprop="position" content="1">
+          </a>
+        </span>
+        »
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <a itemprop="item" title="nha dat" href="#">
+            <span itemprop="name">Nha dat</span>
+            <meta itemprop="position" content="2">
+          </a>
+        </span>
+        »
+        <span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+          <a itemprop="item" title="can ho" href="#">
+            <span itemprop="name">Can ho</span>
+            <meta itemprop="position" content="3">
+          </a>
+        </span>
+      </div>
+      <h1><span><i>Can ho cao cap C200 Avantgarde Plus 2022</i></span></h1>
+    </div>
+
+    <div id="img_container">
+      <div id="groupImages">
+        <span style="display:block;position:absolute;right:0;margin-top:0;background:#ccc;z-index:10;padding:2px;opacity:.65;border-radius:0 0 0 2px;">Ma: 6714706</span>
+        <div class="img_idx_1 img_vertical row_img1">
+          <a href="javascript:void(0)"><img src="https://s.bonbanh.com/uploads/users/791141/car/6714706/m_1773835583.481.jpg" alt="anh chinh"></a>
+        </div>
+        <div class="list_o_imgs">
+          <div class="img_col img_idx_2"><a href="javascript:void(0)"><img src="https://s.bonbanh.com/uploads/users/791141/car/6714706/s_1773835583.524.jpg" alt="anh 2"></a></div>
+          <div class="img_col img_idx_3"><a href="javascript:void(0)"><img src="https://s.bonbanh.com/uploads/users/791141/car/6714706/s_1773835584.699.jpg" alt="anh 3"></a></div>
+          <div class="img_col img_idx_4"><a href="javascript:void(0)"><img src="https://s.bonbanh.com/uploads/users/791141/car/6714706/s_1773835584.122.jpg" alt="anh 4"></a></div>
+          <div class="img_col img_idx_5" style="position:relative;">
+            <a href="javascript:void(0)">
+              <img src="https://s.bonbanh.com/uploads/users/791141/car/6714706/s_1773835585.611.jpg" alt="anh 5">
+              <div id="remain_imgs"><div class="text">+5</div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="price_box box_detail">
+      <h3>Gia ban: <b>1 Ty 378 Trieu</b></h3>
+    </div>
+
+    <div class="tabbertab_detail">
+      <h2>Thong so co ban</h2>
+      <div class="detail_box_" id="detail_box_1">
+        <div class="row">
+          <div class="col"><div class="label">Tinh trang:</div><div class="txt_input"><span class="inp">Da su dung</span></div></div>
+          <div class="col2"><div class="label">Nam xay dung:</div><div class="txt_input"><span class="inp">2022</span></div></div>
+        </div>
+        <div class="row">
+          <div class="col"><div class="label">Loai hinh:</div><div class="txt_input"><span class="inp">Can ho</span></div></div>
+          <div class="col2"><div class="label">Dien tich:</div><div class="txt_input"><span class="inp">67 m2</span></div></div>
+        </div>
+        <div class="row">
+          <div class="col"><div class="label">Phap ly:</div><div class="txt_input"><span class="inp">So hong</span></div></div>
+          <div class="col2"><div class="label">Huong nha:</div><div class="txt_input"><span class="inp">Dong Nam</span></div></div>
+        </div>
+        <div class="row">
+          <div class="col"><div class="label">Phong ngu:</div><div class="txt_input"><span class="inp">2 phong</span></div></div>
+          <div class="col2"><div class="label">Phong tam:</div><div class="txt_input"><span class="inp">2 phong</span></div></div>
+        </div>
+        <div class="row">
+          <div class="col"><div class="label">Noi that:</div><div class="txt_input"><span class="inp">Day du</span></div></div>
+          <div class="col2"><div class="label">Vi tri:</div><div class="txt_input"><span class="inp">Quan 7, TP HCM</span></div></div>
+        </div>
+        <div class="row">
+          <div class="col"><div class="label">Ngay dang:</div><div class="txt_input"><span class="inp">23/03/2026</span></div></div>
+          <div class="col2"><div class="label">Luot xem:</div><div class="txt_input"><span class="inp">1 luot</span></div></div>
+        </div>
+
+        <div class="car_des">
+          <h3>Thong tin mo ta:</h3>
+          <div class="des_txt" itemprop="description">
+            Can ho cao cap, noi that hien dai, ban cong thoang, don nha ngay.<br>
+            Gan trung tam thuong mai, truong hoc, benh vien va tuyen giao thong chinh.<br>
+            Ho tro vay ngan hang, thu tuc phap ly minh bach.<br>
+            Gia con thuong luong cho khach thien chi.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact_box box_detail">
+      <h3>Lien he:</h3>
+      <div class="contact_info">
+        <b>Hoang Tho</b><br>
+        <a class="phone_link" href="tel:0983388331" rel="nofollow">0983 388 331</a><br>
+        Quan 7, TP HCM
+      </div>
+    </div>
+
+    <div class="estimate_cost">
+      Uoc tinh chi phi sang ten tai TP HCM: <span id="price_es">~ 1 Ty 405 Trieu</span>
+    </div>
+
+    <div id="C_BT_MA" class="item_ads"></div>
+
+    <div class="short_link">
+      <label>Truy cap nhanh</label>
+      <ul>
+        <li><a href="#"><strong>Can ho cao cap TP HCM</strong></a></li>
+        <li><a href="#"><strong>Can ho Quan 7</strong></a></li>
+        <li><a href="#"><strong>Can ho 2 phong ngu</strong></a></li>
+        <li><a href="#"><strong>Can ho noi that day du</strong></a></li>
+      </ul>
+    </div>
+
+    <div class="share_detail">
+      <ul>
+        <li>Chia se:</li>
+        <li><a href="#" rel="nofollow"><img src="https://s.bonbanh.com/img/social/square-facebook-32.png" alt="Facebook"></a></li>
+        <li><a href="#" rel="nofollow"><img src="https://s.bonbanh.com/img/social/square-google-plus-32.png" alt="Google"></a></li>
+        <li><a href="#" rel="nofollow"><img src="https://s.bonbanh.com/img/social/square-gmail-32.png" alt="Gmail"></a></li>
+      </ul>
+    </div>
+
+    <div class="util">
+      <span><a href="javascript:void(0)">Gui tin nhan cho nguoi ban</a></span>
+      <span><a href="javascript:void(0)">Bao tin da ban / dang sai</a></span>
+      <span><a href="javascript:void(0)">Luu tin</a></span>
+      <span><a href="index.html">Quay lai ket qua tim kiem</a></span>
+    </div>
+
+    <div id="other_cars">
+      <h3>Tin bat dong san khac cung phan khuc</h3>
+      <div class="related-scroll">
+        <div class="regular_box">
+          <a class="detail_img" href="javascript:void(0)"><img src="https://s.bonbanh.com/uploads/users/590241/car/6668487/s_1771075730.989.jpg" alt="tin lien quan 1"></a>
+          <span class="o_price">1 Ty 459 Trieu</span>
+          <a class="detail_title" href="javascript:void(0)"><h4>Can ho trung tam - <b>2023</b></h4></a>
+          <p class="o_other_info">2PN, 2WC, 74 m2, noi that day du...</p>
+          <span class="o_city">[Ha Noi]</span>
+        </div>
+        <div class="regular_box">
+          <a class="detail_img" href="javascript:void(0)"><img src="https://s.bonbanh.com/uploads/users/454158/car/6662008/s_1770615670.474.jpg" alt="tin lien quan 2"></a>
+          <span class="o_price">2 Ty 50 Trieu</span>
+          <a class="detail_title" href="javascript:void(0)"><h4>Nha pho 4 tang - <b>2023</b></h4></a>
+          <p class="o_other_info">Mat tien 5m, phap ly ro rang...</p>
+          <span class="o_city">[TP HCM]</span>
+        </div>
+        <div class="regular_box">
+          <a class="detail_img" href="javascript:void(0)"><img src="https://s.bonbanh.com/uploads/users/676778/car/6683984/s_1772198024.451.jpg" alt="tin lien quan 3"></a>
+          <span class="o_price">2 Ty 29 Trieu</span>
+          <a class="detail_title" href="javascript:void(0)"><h4>Dat nen khu dan cu - <b>2023</b></h4></a>
+          <p class="o_other_info">Dien tich 90 m2, duong o to...</p>
+          <span class="o_city">[TP HCM]</span>
+        </div>
+        <div class="regular_box">
+          <a class="detail_img" href="javascript:void(0)"><img src="https://s.bonbanh.com/uploads/users/854027/car/5202776/s_1725875150.967.jpg" alt="tin lien quan 4"></a>
+          <span class="o_price">2 Ty 99 Trieu</span>
+          <a class="detail_title" href="javascript:void(0)"><h4>Can ho penthouse - <b>2023</b></h4></a>
+          <p class="o_other_info">View song, noi that cao cap...</p>
+          <span class="o_city">[Da Nang]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var toggleBtn = document.getElementById("mobile-menu-toggle");
+      var filterBtn = document.getElementById("mobile-filter-toggle");
+      var menu = document.getElementById("nav_menu");
+      var filterBox = document.getElementById("filter-box");
+      var overlay = document.getElementById("nav_overlay");
+
+      function isMobile() {
+        return window.matchMedia("(max-width: 768px)").matches;
+      }
+
+      function openMenu() {
+        if (!isMobile() || !menu || !overlay) {
+          return;
+        }
+        closeFilter();
+        menu.classList.add("slide-active");
+        overlay.style.display = "block";
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeMenu() {
+        if (!menu || !overlay) {
+          return;
+        }
+        menu.classList.remove("slide-active");
+        if (!filterBox || !filterBox.classList.contains("filter-active")) {
+          overlay.style.display = "none";
+          document.body.style.overflow = "";
+        }
+      }
+
+      function openFilter() {
+        if (!isMobile() || !filterBox || !overlay) {
+          return;
+        }
+        closeMenu();
+        filterBox.classList.add("filter-active");
+        overlay.style.display = "block";
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeFilter() {
+        if (!filterBox || !overlay) {
+          return;
+        }
+        filterBox.classList.remove("filter-active");
+        if (!menu || !menu.classList.contains("slide-active")) {
+          overlay.style.display = "none";
+          document.body.style.overflow = "";
+        }
+      }
+
+      window.openRightFilter = function () {
+        if (!filterBox) {
+          return false;
+        }
+        if (filterBox.classList.contains("filter-active")) {
+          closeFilter();
+        } else {
+          openFilter();
+        }
+        return false;
+      };
+
+      function closePanels() {
+        closeMenu();
+        closeFilter();
+      }
+
+      window.openLogin = window.openLogin || function () {
+        closePanels();
+      };
+
+      if (filterBtn) {
+        filterBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          window.openRightFilter();
+        });
+      }
+
+      if (filterBox) {
+        filterBox.addEventListener("click", function (e) {
+          var target = e.target;
+          if (target && target.closest(".cancel_filter")) {
+            e.preventDefault();
+            closeFilter();
+          }
+        });
+      }
+
+      if (overlay) {
+        overlay.addEventListener("click", closePanels);
+      }
+
+      if (menu) {
+        menu.addEventListener("click", function (e) {
+          var target = e.target;
+          if (target && target.closest("a")) {
+            closeMenu();
+          }
+        });
+      }
+
+      if (toggleBtn) {
+        toggleBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (menu.classList.contains("slide-active")) {
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+      }
+
+      window.addEventListener("resize", function () {
+        if (!isMobile()) {
+          closePanels();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
