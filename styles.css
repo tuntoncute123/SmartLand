@@ -65,7 +65,7 @@ a {
 }
 
 #logo::before {
-    content: "nhadat.com";
+    content: "muanhadep.com.vn";
     position: absolute;
     left: 4px;
     top: 15px;
@@ -643,7 +643,7 @@ a {
 }
 
 .s-logo::before {
-    content: "nhadat.com";
+    content: "muanhadep.com.vn";
     position: absolute;
     left: 10px;
     top: 18px;
@@ -1182,13 +1182,14 @@ a {
         display: block;
         width: 180px;
         height: 44px;
-        margin: 7px auto;
+        margin: 7px 60px;
         background: transparent;
     }
     #logo::before {
         left: 6px;
         top: 10px;
         font-size: 28px;
+        
     }
     #logo::after {
         display: none;
