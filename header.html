@@ -66,7 +66,7 @@
         #top-nav {
             float: right;
             margin-top: 2px;
-            *width: 325px;
+            width: 325px;
         }
         
         #top-nav ul {
@@ -187,6 +187,92 @@
                 border-top: none;
             }
         }
+
+        #footer {
+            width: 1119px;
+            margin: 10px auto 0;
+            display: flex;
+            align-items: stretch;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #333;
+        }
+
+        #footer .l-footer,
+        #footer .r-footer {
+            width: 8px;
+            background: #e0e0e0;
+        }
+
+        #footer .c-footer {
+            flex: 1;
+            border: 1px solid #d4d4d4;
+            border-left: 0;
+            border-right: 0;
+            background: #f6f6f6;
+            padding: 8px 10px;
+        }
+
+        #footer .f-menu {
+            margin-bottom: 6px;
+            color: #666;
+        }
+
+        #footer .f-menu .f-link {
+            color: #0b3fb3;
+            margin: 0 2px;
+        }
+
+        #footer .f-menu span {
+            color: #9a9a9a;
+            margin: 0 3px;
+        }
+
+        #footer .f-copyright {
+            color: #333;
+        }
+
+        #footer .f-copyright::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        #footer .f-copyright strong {
+            font-size: 12px;
+        }
+
+        @media (max-width: 1120px) {
+            #footer {
+                width: 100%;
+                padding: 0 8px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            #footer {
+                margin-top: 8px;
+                padding: 0 6px;
+            }
+            #footer .l-footer,
+            #footer .r-footer {
+                display: none;
+            }
+            #footer .c-footer {
+                border-left: 1px solid #d4d4d4;
+                border-right: 1px solid #d4d4d4;
+                padding: 8px;
+            }
+            #footer .f-menu {
+                line-height: 1.6;
+            }
+            #footer .f-copyright > div[style*="float: left"],
+            #footer .f-copyright > div[style*="float: right"] {
+                float: none !important;
+                width: 100% !important;
+                margin-top: 8px !important;
+            }
+        }
     </style>
 </head>
 
@@ -194,7 +280,7 @@
     <div id="header">
         <a class="navbar-toggle"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></a>
         <a id="logo" href="https://bonbanh.com/" title="oto, mua ban oto"></a>
-        <div id="top-nav" style="*width:325px">
+        <div id="top-nav" style="width:325px">
             <ul>
                 <li><a rel="nofollow" href="dang-ky-thanh-vien/">Đăng ký</a></li>
                 <li><a rel="nofollow" href="thanh-vien/" onclick="open_dialog('login-dlg','username1');return false;">Đăng nhập</a></li>
@@ -207,6 +293,18 @@
             <a
                 class="menu-item" href="dang-tin-ban-xe" title="Bán ô tô">Bán ô tô</a><a class="menu-item" href="gia-xe-oto" title="Giá xe ô tô mới" itemprop="url"><span itemprop="name">Giá xe ô tô</span></a><a class="menu-item" href="tin-mua-xe" title="Các tin mua xe">Cần mua ?</a><a class="menu-item" href="my-bonbanh"
                     title="Quản lý tin đăng của bạn...">My BonBanh</a></div>
+    </div>
+
+    <div id="footer">
+        <div class="l-footer"></div>
+        <div class="c-footer">
+            <div class="f-menu"><a href="https://bonbanh.com/" class="f-link" title="mua ban oto">Trang chủ</a> <span>|</span><a rel="nofollow" href="quy-che-hoat-dong/#dangtin" class="f-link">Quy định đăng tin</a> <span>|</span><a rel="nofollow" href="quy-che-hoat-dong/" class="f-link">Quy chế hoạt động</a> <span>|</span><a rel="nofollow" href="chinh-sach-quyen-rieng-tu/" class="f-link">Bảo mật</a> <span>|</span> <a rel="nofollow" href="gioi-thieu/" class="f-link">Trợ giúp</a> <span>|</span><a rel="nofollow" href="lien-he/" class="f-link">Liên hệ</a> </div>
+            <div class="f-copyright">
+                <div style="float: left; width: 746px;"><strong>Bonbanh.com - Chuyên trang mua bán ô tô uy tín nhất Việt Nam từ năm 2006.</strong><br>Điện thoại: 024-7109 7999 . Email: <script>document.write("con"+"tact@"+"bon"+"banh.com");</script>contact@bonbanh.com. <span>Hotline: <script>document.write("094"+" 2727"+" 225");</script>094 2727 225</span><br><span style="color:red">Bonbanh không bán xe trực tiếp, quý khách mua xe vui lòng liên hệ trực tiếp người đăng tin.<br></span>Copyright © 2006-2026 <a href="https://bonbanh.com/" title="oto, mua ban oto">Bonbanh.com</a> - <b style="font-weight:bold">Công ty cổ phần Kypernet Việt Nam.</b> Mã số doanh nghiệp: 0101833960 &nbsp; &nbsp;1</div>
+                <div style="float: right; width: 200px;margin-top:3px"> <a rel="nofollow" href="http://online.gov.vn/Home/WebDetails/8602" target="_blank"><img src="https://s.bonbanh.com/img/bct.gif" title="Bonbanh.com đã đăng ký với Bộ Công Thương" alt=""></a> </div>
+            </div>
+        </div>
+        <div class="r-footer"></div>
     </div>
 </body>
 

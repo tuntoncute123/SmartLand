@@ -456,8 +456,98 @@
             overflow: hidden;
         }
         
+        .save-row {
+            margin-top: 8px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .save-listing-btn {
+            border: 0;
+            background: transparent;
+            color: #b6b6b6;
+            font-size: 18px;
+            line-height: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            padding: 0;
+        }
+        
+        .save-listing-btn .star-icon {
+            display: inline-block;
+            width: 18px;
+            text-align: center;
+            font-size: 20px;
+            line-height: 1;
+        }
+        
+        .save-listing-btn .label {
+            font-size: 17px;
+            color: #c1c1c1;
+            font-weight: 400;
+        }
+        
+        .save-listing-btn.is-saved,
+        .save-listing-btn.is-saved .label {
+            color: #f39c12;
+        }
+        
+        #count_saved {
+            display: inline-block;
+            min-width: 16px;
+            height: 16px;
+            line-height: 16px;
+            text-align: center;
+            border-radius: 8px;
+            background: #d9472b;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 0 4px;
+            margin-left: 4px;
+            vertical-align: middle;
+        }
+        
         .cb7 b {
             color: #444;
+        }
+
+        .list-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 6px 12px;
+            border-top: 1px solid #d9d9d9;
+            background: #f8f8f8;
+        }
+
+        .list-pagination .page-btn {
+            min-width: 30px;
+            height: 30px;
+            border: 1px solid #c9c9c9;
+            background: #fff;
+            color: #1f3fae;
+            font-size: 12px;
+            font-weight: 700;
+            border-radius: 3px;
+            cursor: pointer;
+            padding: 0 8px;
+        }
+
+        .list-pagination .page-btn.active {
+            background: #1f57d6;
+            border-color: #1f57d6;
+            color: #fff;
+        }
+
+        .list-pagination .page-btn:disabled {
+            color: #aaa;
+            border-color: #ddd;
+            background: #f3f3f3;
+            cursor: default;
         }
         
         #mem-box {
@@ -597,6 +687,14 @@
             overflow-x: auto;
             overflow-y: hidden;
             -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .universal_makes::-webkit-scrollbar {
+            display: none;
+            width: 0;
+            height: 0;
         }
         
         .universal_makes ul {
@@ -611,7 +709,7 @@
         
         .universal_makes li {
             text-align: center;
-            flex: 0 0 56px;
+            flex: 0 0 86px;
         }
         
         .universal_makes .universal_link {
@@ -619,18 +717,28 @@
             color: #444;
         }
         
-        .universal_makes .universal_link img {
-            width: 65px;
-            height: 50px;
-            object-fit: contain;
+        .universal_makes .universal_link .estate-icon {
+            width: 60px;
+            height: 46px;
             margin: 0 auto 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            line-height: 1;
+            border-radius: 10px;
+            background: #f3f4ef;
+            border: 1px solid #e2e2de;
+        }
+        
+        .universal_makes .universal_link .estate-icon span {
             display: block;
         }
         
         .universal_makes .universal_link p,
         .universal_makes .universal_link h2 {
             margin: 0;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 400;
             line-height: 1.15;
             color: #333;
@@ -865,9 +973,73 @@
             border-left: 1px solid rgba(255, 255, 255, 0.4);
         }
         
+        .annotate_ico {
+            width: 1119px;
+            margin: 8px auto 0;
+            padding: 6px 8px;
+            border: 1px solid #d3d3d3;
+            background: #f5f7e7;
+            color: #222;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        .annotate_ico img {
+            width: 20px;
+            height: 20px;
+            vertical-align: middle;
+            margin: -2px 2px 0;
+        }
+        
+        #h_intro.pdes_blk {
+            width: 1119px;
+            margin: 0 auto 14px;
+            border: 1px solid #d3d3d3;
+            border-top: 0;
+            background: #efefef;
+            padding: 8px 10px 10px;
+        }
+        
+        .page_des {
+            color: #1d1d1d;
+            font-size: 12px;
+            line-height: 1.45;
+        }
+        
+        .page_des p {
+            margin: 0 0 8px;
+        }
+        
+        .keyword_blk h3 {
+            margin: 0 0 8px;
+            font-size: 22px;
+            color: #163fbe;
+            line-height: 1.15;
+        }
+        
+        .keyword_blk ul {
+            margin: 0;
+            padding: 0 0 0 18px;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 6px 28px;
+        }
+        
+        .keyword_blk li {
+            color: #111;
+            font-size: 12px;
+            line-height: 1.25;
+        }
+        
+        .keyword_blk li a {
+            color: #0c3fb2;
+        }
+        
         @media (max-width: 1120px) {
             #header,
-            #page-wrap {
+            #page-wrap,
+            .annotate_ico,
+            #h_intro.pdes_blk {
                 width: 100%;
                 padding-left: 8px;
                 padding-right: 8px;
@@ -1105,6 +1277,25 @@
                 font-size: 12px;
                 line-height: 1.3;
             }
+            .save-row {
+                margin-top: 6px;
+            }
+            .save-listing-btn {
+                font-size: 16px;
+            }
+            .save-listing-btn .label {
+                font-size: 16px;
+            }
+            .list-pagination {
+                gap: 4px;
+                padding: 8px 4px 10px;
+            }
+            .list-pagination .page-btn {
+                min-width: 28px;
+                height: 28px;
+                font-size: 11px;
+                padding: 0 7px;
+            }
             .city-box {
                 gap: 10px;
                 padding: 6px 8px;
@@ -1126,6 +1317,117 @@
             }
             .g-b-header span {
                 font-size: 13px;
+            }
+            .annotate_ico {
+                font-size: 13px;
+                line-height: 1.5;
+                margin-top: 10px;
+            }
+            #h_intro.pdes_blk {
+                padding: 8px;
+                margin-bottom: 12px;
+            }
+            .page_des {
+                font-size: 13px;
+                line-height: 1.5;
+            }
+            .keyword_blk h3 {
+                font-size: 20px;
+                margin-bottom: 8px;
+            }
+            .keyword_blk ul {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 4px 10px;
+                padding-left: 16px;
+            }
+            .keyword_blk li {
+                font-size: 12px;
+            }
+        }
+        
+        #footer {
+            width: 1119px;
+            margin: 10px auto 0;
+            display: flex;
+            align-items: stretch;
+            font-size: 12px;
+            line-height: 1.4;
+            color: #333;
+        }
+        
+        #footer .l-footer,
+        #footer .r-footer {
+            width: 8px;
+            background: #e0e0e0;
+        }
+        
+        #footer .c-footer {
+            flex: 1;
+            border: 1px solid #d4d4d4;
+            border-left: 0;
+            border-right: 0;
+            background: #f6f6f6;
+            padding: 8px 10px;
+        }
+        
+        #footer .f-menu {
+            margin-bottom: 6px;
+            color: #666;
+        }
+        
+        #footer .f-menu .f-link {
+            color: #0b3fb3;
+            margin: 0 2px;
+        }
+        
+        #footer .f-menu span {
+            color: #9a9a9a;
+            margin: 0 3px;
+        }
+        
+        #footer .f-copyright {
+            color: #333;
+        }
+        
+        #footer .f-copyright::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+        
+        #footer .f-copyright strong {
+            font-size: 12px;
+        }
+        
+        @media (max-width: 1120px) {
+            #footer {
+                width: 100%;
+                padding: 0 8px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            #footer {
+                margin-top: 8px;
+                padding: 0 6px;
+            }
+            #footer .l-footer,
+            #footer .r-footer {
+                display: none;
+            }
+            #footer .c-footer {
+                border-left: 1px solid #d4d4d4;
+                border-right: 1px solid #d4d4d4;
+                padding: 8px;
+            }
+            #footer .f-menu {
+                line-height: 1.6;
+            }
+            #footer .f-copyright>div[style*="float: left"],
+            #footer .f-copyright>div[style*="float: right"] {
+                float: none !important;
+                width: 100% !important;
+                margin-top: 8px !important;
             }
         }
     </style>
@@ -1238,36 +1540,14 @@
                 <h3><span>Tìm theo loại hình BĐS</span></h3>
                 <div class="y-box-content">
                     <ul id="primary-nav">
-                        <li><a class="mtop-item" href="oto/audi">Audi</a></li>
-                        <li><a class="mtop-item" href="oto/bentley">Bentley</a></li>
-                        <li><a class="mtop-item" href="oto/bmw">BMW</a></li>
-                        <li><a class="mtop-item" href="oto/byd">BYD</a></li>
-                        <li><a class="mtop-item" href="oto/chevrolet">Chevrolet</a></li>
-                        <li><a class="mtop-item" href="oto/daewoo">Daewoo</a></li>
-                        <li><a class="mtop-item" href="oto/ford">Ford</a></li>
-                        <li><a class="mtop-item" href="oto/honda">Honda</a></li>
-                        <li><a class="mtop-item" href="oto/hyundai">Hyundai</a></li>
-                        <li><a class="mtop-item" href="oto/isuzu">Isuzu</a></li>
-                        <li><a class="mtop-item" href="oto/jaguar">Jaguar</a></li>
-                        <li><a class="mtop-item" href="oto/jeep">Jeep</a></li>
-                        <li><a class="mtop-item" href="oto/kia">Kia</a></li>
-                        <li><a class="mtop-item" href="oto/landrover">LandRover</a></li>
-                        <li><a class="mtop-item" href="oto/lexus">Lexus</a></li>
-                        <li><a class="mtop-item" href="oto/mazda">Mazda</a></li>
-                        <li><a class="mtop-item" href="oto/mercedes_benz">Mercedes Benz</a></li>
-                        <li><a class="mtop-item" href="oto/mg">MG</a></li>
-                        <li><a class="mtop-item" href="oto/mini">Mini</a></li>
-                        <li><a class="mtop-item" href="oto/mitsubishi">Mitsubishi</a></li>
-                        <li><a class="mtop-item" href="oto/nissan">Nissan</a></li>
-                        <li><a class="mtop-item" href="oto/peugeot">Peugeot</a></li>
-                        <li><a class="mtop-item" href="oto/porsche">Porsche</a></li>
-                        <li><a class="mtop-item" href="oto/rolls_royce">Rolls Royce</a></li>
-                        <li><a class="mtop-item" href="oto/subaru">Subaru</a></li>
-                        <li><a class="mtop-item" href="oto/suzuki">Suzuki</a></li>
-                        <li><a class="mtop-item" href="oto/toyota">Toyota</a></li>
-                        <li><a class="mtop-item" href="oto/vinfast">VinFast</a></li>
-                        <li><a class="mtop-item" href="oto/volkswagen">Volkswagen</a></li>
-                        <li><a class="mtop-item" href="oto/volvo">Volvo</a></li>
+                        <li><a class="mtop-item" href="bds/nharieng">Nhà riêng</a></li>
+                        <li><a class="mtop-item" href="bds/matbang">Mặt bằng</a></li>
+                        <li><a class="mtop-item" href="bds/chungcu">Chung cư</a></li>
+                        <li><a class="mtop-item" href="bds/nhapho">Nhà phố</a></li>
+                        <li><a class="mtop-item" href="bds/datnen">Đất nền</a></li>
+                        <li><a class="mtop-item" href="bds/vanphong">Văn phòng</a></li>
+                        <li><a class="mtop-item" href="bds/khoxuong">Kho xưởng</a></li>
+                        <li><a class="mtop-item" href="bds/toanha">Tòa nhà</a></li>
                     </ul>
                 </div>
             </div>
@@ -1281,118 +1561,51 @@
             <div class="universal_makes" onclick="remove_cache();">
                 <ul itemscope="" itemtype="https://schema.org/SiteNavigationElement">
                     <li>
-                        <a itemprop="url" title="oto Toyota, xe Toyota" href="oto/toyota" class="universal_link"><img alt="Toyota logo" src="https://s.bonbanh.com/img/car_makes/toyota.png">
-                            <p itemprop="name">Toyota</p>
+                        <a itemprop="url" title="Nhà riêng" href="oto/nha-rieng" class="universal_link">
+                            <span class="estate-icon" aria-hidden="true"><span>🏠</span></span>
+                            <p itemprop="name">Nhà Riêng</p>
                         </a>
                     </li>
                     <li>
-                        <a itemprop="url" title="oto Hyundai, xe Hyundai" href="oto/hyundai" class="universal_link"><img alt="Hyundai logo" src="https://s.bonbanh.com/img/car_makes/hyundai.png">
-                            <p itemprop="name">Hyundai</p>
+                        <a itemprop="url" title="Đất nền" href="oto/dat-nen" class="universal_link">
+                            <span class="estate-icon" aria-hidden="true"><span>🏗️</span></span>
+                            <p itemprop="name">Đất Nền</p>
                         </a>
                     </li>
                     <li>
-                        <a itemprop="url" title="oto Kia, xe Kia" href="oto/kia" class="universal_link"><img alt="Kia logo" src="https://s.bonbanh.com/img/car_makes/kia.png">
-                            <p itemprop="name">Kia</p>
+                        <a itemprop="url" title="Chung cư" href="oto/chung-cu" class="universal_link">
+                            <span class="estate-icon" aria-hidden="true"><span>🏢</span></span>
+                            <p itemprop="name">Chung Cư</p>
                         </a>
                     </li>
                     <li>
-                        <a itemprop="url" title="oto Ford, xe Ford" href="oto/ford" class="universal_link"><img alt="Ford logo" src="https://s.bonbanh.com/img/car_makes/ford.png">
-                            <p itemprop="name">Ford</p>
+                        <a itemprop="url" title="Văn phòng" href="oto/van-phong" class="universal_link">
+                            <span class="estate-icon" aria-hidden="true"><span>🏛️</span></span>
+                            <p itemprop="name">Văn Phòng</p>
                         </a>
                     </li>
                     <li>
-                        <a itemprop="url" title="oto Mazda, xe Mazda" href="oto/mazda" class="universal_link"><img alt="Mazda logo" src="https://s.bonbanh.com/img/car_makes/mazda.png">
-                            <p itemprop="name">Mazda</p>
+                        <a itemprop="url" title="Mặt bằng" href="oto/mat-bang" class="universal_link">
+                            <span class="estate-icon" aria-hidden="true"><span>🛒</span></span>
+                            <p itemprop="name">Mặt Bằng</p>
                         </a>
                     </li>
                     <li>
-                        <a itemprop="url" title="oto Honda, xe Honda" href="oto/honda" class="universal_link"><img alt="Honda logo" src="https://s.bonbanh.com/img/car_makes/honda.png">
-                            <p itemprop="name">Honda</p>
+                        <a itemprop="url" title="Biệt thự" href="oto/biet-thu" class="universal_link">
+                            <span class="estate-icon" aria-hidden="true"><span>👑</span></span>
+                            <p itemprop="name">Biệt Thự</p>
                         </a>
                     </li>
                     <li>
-                        <a itemprop="url" title="oto Mercedes Benz, xe Mercedes Benz" href="oto/mercedes_benz" class="universal_link"><img alt="Mercedes Benz logo" src="https://s.bonbanh.com/img/car_makes/mercedes.png">
-                            <p itemprop="name">Mercedes Benz</p>
+                        <a itemprop="url" title="Kho xưởng" href="oto/kho-xuong" class="universal_link">
+                            <span class="estate-icon" aria-hidden="true"><span>🏭</span></span>
+                            <p itemprop="name">Kho Xưởng</p>
                         </a>
                     </li>
                     <li>
-                        <a itemprop="url" title="oto Mitsubishi, xe Mitsubishi" href="oto/mitsubishi" class="universal_link"><img alt="Mitsubishi logo" src="https://s.bonbanh.com/img/car_makes/mitsubishi.png">
-                            <p itemprop="name">Mitsubishi</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a itemprop="url" title="oto Lexus, xe Lexus" href="oto/lexus" class="universal_link"><img alt="Lexus logo" src="https://s.bonbanh.com/img/car_makes/lexus.png">
-                            <p itemprop="name">Lexus</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a itemprop="url" title="oto BMW, xe BMW" href="oto/bmw" class="universal_link"><img alt="BMW logo" src="https://s.bonbanh.com/img/car_makes/bmw.png">
-                            <p itemprop="name">BMW</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a itemprop="url" title="oto Vinfast, xe Vinfast" href="oto/vinfast" class="universal_link"><img alt="Vinfast logo" src="https://s.bonbanh.com/img/car_makes/vinfast.png">
-                            <p itemprop="name">Vinfast</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a itemprop="url" title="oto Chevrolet, xe Chevrolet" href="oto/chevrolet" class="universal_link"><img alt="Chevrolet logo" src="https://s.bonbanh.com/img/car_makes/chevrolet.png">
-                            <p itemprop="name">Chevrolet</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a itemprop="url" title="oto Porsche, xe Porsche" href="oto/porsche" class="universal_link"><img alt="Porsche logo" src="https://s.bonbanh.com/img/car_makes/porsche.png">
-                            <p itemprop="name">Porsche</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a itemprop="url" title="oto LandRover, xe LandRover" href="oto/landrover" class="universal_link"><img alt="LandRover logo" src="https://s.bonbanh.com/img/car_makes/landrover.png">
-                            <p itemprop="name">LandRover</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a itemprop="url" title="oto MG, xe MG" href="oto/mg" class="universal_link"><img alt="MG logo" src="https://s.bonbanh.com/img/car_makes/mg.png">
-                            <p itemprop="name">MG</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a itemprop="url" title="oto Volkswagen, xe Volkswagen" href="oto/volkswagen" class="universal_link"><img alt="Volkswagen logo" src="https://s.bonbanh.com/img/car_makes/volkswagen.png">
-                            <p itemprop="name">Volkswagen</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a itemprop="url" title="oto Suzuki, xe Suzuki" href="oto/suzuki" class="universal_link"><img alt="Suzuki logo" src="https://s.bonbanh.com/img/car_makes/suzuki.png">
-                            <p itemprop="name">Suzuki</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a itemprop="url" title="oto Audi, xe Audi" href="oto/audi" class="universal_link"><img alt="Audi logo" src="https://s.bonbanh.com/img/car_makes/audi.png">
-                            <p itemprop="name">Audi</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a itemprop="url" title="oto Nissan, xe Nissan" href="oto/nissan" class="universal_link"><img alt="Nissan logo" src="https://s.bonbanh.com/img/car_makes/nissan.png">
-                            <p itemprop="name">Nissan</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a itemprop="url" title="oto Peugeot, xe Peugeot" href="oto/peugeot" class="universal_link"><img alt="Peugeot logo" src="https://s.bonbanh.com/img/car_makes/peugeot.png">
-                            <p itemprop="name">Peugeot</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a itemprop="url" title="oto Daewoo, xe Daewoo" href="oto/daewoo" class="universal_link"><img alt="Daewoo logo" src="https://s.bonbanh.com/img/car_makes/daewoo.png">
-                            <p itemprop="name">Daewoo</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a itemprop="url" title="oto Subaru, xe Subaru" href="oto/subaru" class="universal_link"><img alt="Subaru logo" src="https://s.bonbanh.com/img/car_makes/subaru.png">
-                            <p itemprop="name">Subaru</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)" onclick="openRightFilter('make')" class="universal_link other_link"><img alt="hang khac" src="https://s.bonbanh.com/img/car_makes/other_make.png">
-                            <h2>Hãng khác</h2>
+                        <a itemprop="url" title="Tòa nhà" href="oto/toa-nha" class="universal_link">
+                            <span class="estate-icon" aria-hidden="true"><span>🏙️</span></span>
+                            <p itemprop="name">Tòa Nhà</p>
                         </a>
                     </li>
                 </ul>
@@ -1420,7 +1633,7 @@
 
             <div class="gray-box" id="h-list-car">
                 <div class="g-b-header">
-                    <h1>MUA BÁN BẤT ĐỘNG SẢN</h1><span>Tổng : 25,752 tin</span></div>
+                    <h1>MUA BÁN BẤT ĐỘNG SẢN</h1><span id="listing-total">Tổng : 25,752 tin</span></div>
                 <div class="g-box-content">
                     <div class="car-item row1">
                         <a href="detail.html" title="tin ban can ho cao cap ha noi">
@@ -1440,6 +1653,7 @@
                                 <div class="cb7-item addr"><span class="k">Địa chỉ:</span><span class="v">Keangnam 5A Đinh Núp, Phạm Hùng</span></div>
                                 <div class="cb7-item"><span class="k">ĐT:</span><span class="v">0902 188 812</span></div>
                             </div>
+                            <div class="save-row"><button type="button" class="save-listing-btn" data-listing-id="6659305" aria-pressed="false" title="Lưu tin"><span class="star-icon" aria-hidden="true">☆</span><span class="label">Lưu tin</span></button></div>
                         </div>
                     </div>
 
@@ -1461,6 +1675,7 @@
                                 <div class="cb7-item addr"><span class="k">Địa chỉ:</span><span class="v">Cầu Giấy, Hà Nội</span></div>
                                 <div class="cb7-item"><span class="k">ĐT:</span><span class="v">0345 254 770</span></div>
                             </div>
+                            <div class="save-row"><button type="button" class="save-listing-btn" data-listing-id="6718569" aria-pressed="false" title="Lưu tin"><span class="star-icon" aria-hidden="true">☆</span><span class="label">Lưu tin</span></button></div>
                         </div>
                     </div>
 
@@ -1482,6 +1697,7 @@
                                 <div class="cb7-item addr"><span class="k">Địa chỉ:</span><span class="v">16A Phạm Hùng, Mai Dịch, Cầu Giấy</span></div>
                                 <div class="cb7-item"><span class="k">ĐT:</span><span class="v">0961 237 874</span></div>
                             </div>
+                            <div class="save-row"><button type="button" class="save-listing-btn" data-listing-id="6713565" aria-pressed="false" title="Lưu tin"><span class="star-icon" aria-hidden="true">☆</span><span class="label">Lưu tin</span></button></div>
                         </div>
                     </div>
 
@@ -1503,9 +1719,11 @@
                                 <div class="cb7-item addr"><span class="k">Địa chỉ:</span><span class="v">Đường mới TT Quỳnh Côi (396b), Quỳnh Phụ</span></div>
                                 <div class="cb7-item"><span class="k">ĐT:</span><span class="v">0976 888 978</span></div>
                             </div>
+                            <div class="save-row"><button type="button" class="save-listing-btn" data-listing-id="6699607" aria-pressed="false" title="Lưu tin"><span class="star-icon" aria-hidden="true">☆</span><span class="label">Lưu tin</span></button></div>
                         </div>
                     </div>
                 </div>
+                <div class="list-pagination" id="listing-pagination"></div>
             </div>
         </div>
 
@@ -1546,6 +1764,83 @@
             </div>
         </div>
     </div>
+
+    <div class="annotate_ico">Chú thích: <img src="https://s.bonbanh.com/img/approved2.png" width="20" alt="approved"> Tin bất động sản đã được xác thực thông tin pháp lý (sổ hồng/sổ đỏ, tình trạng quy hoạch, giấy tờ liên quan) bởi SmartLand. Việc xác thực này giúp người mua và
+        người thuê đánh giá tốt hơn độ tin cậy của tin đăng.</div>
+
+    <div id="h_intro" class="pdes_blk">
+        <div class="page_des">
+            <p class="des_content "></p>
+            <p>Những năm gần đây <strong>BẤT ĐỘNG SẢN</strong> đã và đang dần trở thành một nhu cầu thiết yếu và kênh tích sản quan trọng tại Việt Nam. Cùng với tốc độ phát triển kinh tế, hạ tầng đô thị và nhu cầu an cư ngày càng tăng, việc sở hữu hoặc đầu
+                tư nhà đất ngày càng phổ biến trong nhiều gia đình. SmartLand - nền tảng <a href="https://bonbanh.com" title="mua bán bất động sản"><strong>mua bán bất động sản</strong></a> ra đời với mục tiêu kết nối hiệu quả giữa người <strong>mua/thuê nhà đất</strong>                và người <strong>bán/cho thuê bất động sản</strong>, mang đến kênh thông tin <em>mua bán BĐS</em> minh bạch và đáng tin cậy.<br>Chúng tôi không ngừng cải thiện chất lượng dịch vụ để giúp người dùng dễ dàng tiếp cận thông tin thị trường,
+                giá cả và pháp lý một cách rõ ràng, chính xác. Tại SmartLand, thông tin về căn hộ, nhà phố, đất nền, biệt thự và bất động sản thương mại được cập nhật thường xuyên để bạn nhanh chóng tìm được lựa chọn phù hợp với nhu cầu và ngân sách.
+                Nếu bạn đang sở hữu bất động sản cần chuyển nhượng hoặc cho thuê, SmartLand là kênh đăng tin hiệu quả, giúp tiếp cận đúng khách hàng một cách nhanh chóng.<br>SmartLand luôn sẵn sàng lắng nghe mọi ý kiến đóng góp để nâng cao chất lượng
+                dịch vụ và trải nghiệm người dùng ngày càng tốt hơn.</p>
+            <p></p>
+        </div>
+        <div class="keyword_blk">
+            <h3>Từ khóa mua bán bất động sản phổ biến</h3>
+            <ul itemscope="" itemtype="http://schema.org/ItemList">
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="1"><a itemprop="url" href="https://bonbanh.com/oto/can-ho" title="căn hộ"><span itemprop="name">căn hộ</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="2"><a itemprop="url" href="https://bonbanh.com/oto/chung-cu" title="chung cư"><span itemprop="name">chung cư</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="3"><a itemprop="url" href="https://bonbanh.com/oto/nha-pho" title="nhà phố"><span itemprop="name">nhà phố</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="4"><a itemprop="url" href="https://bonbanh.com/oto/biet-thu" title="biệt thự"><span itemprop="name">biệt thự</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="5"><a itemprop="url" href="https://bonbanh.com/oto/dat-nen" title="đất nền"><span itemprop="name">đất nền</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="6"><a itemprop="url" href="https://bonbanh.com/oto/dat-tho-cu" title="đất thổ cư"><span itemprop="name">đất thổ cư</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="7"><a itemprop="url" href="https://bonbanh.com/oto/shophouse" title="shophouse"><span itemprop="name">shophouse</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="8"><a itemprop="url" href="https://bonbanh.com/oto/van-phong" title="văn phòng"><span itemprop="name">văn phòng</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="9"><a itemprop="url" href="https://bonbanh.com/oto/phong-tro" title="phòng trọ"><span itemprop="name">phòng trọ</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="10"><a itemprop="url" href="https://bonbanh.com/oto/kho-xuong" title="kho xưởng"><span itemprop="name">kho xưởng</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="11"><a itemprop="url" href="https://bonbanh.com/oto/nha-mat-tien" title="nhà mặt tiền"><span itemprop="name">nhà mặt tiền</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="12"><a itemprop="url" href="https://bonbanh.com/oto/nha-hem" title="nhà hẻm"><span itemprop="name">nhà hẻm</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="13"><a itemprop="url" href="https://bonbanh.com/oto/dat-du-an" title="đất dự án"><span itemprop="name">đất dự án</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="14"><a itemprop="url" href="https://bonbanh.com/oto/ban-nha-ha-noi" title="bán nhà hà nội"><span itemprop="name">bán nhà hà nội</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="15"><a itemprop="url" href="https://bonbanh.com/oto/ban-nha-tp-hcm" title="bán nhà tp hcm"><span itemprop="name">bán nhà tp hcm</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="16"><a itemprop="url" href="https://bonbanh.com/oto/chung-cu-ha-noi" title="chung cư hà nội"><span itemprop="name">chung cư hà nội</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="17"><a itemprop="url" href="https://bonbanh.com/oto/chung-cu-tp-hcm" title="chung cư tp hcm"><span itemprop="name">chung cư tp hcm</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="18"><a itemprop="url" href="https://bonbanh.com/oto/dat-da-nang" title="đất đà nẵng"><span itemprop="name">đất đà nẵng</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="19"><a itemprop="url" href="https://bonbanh.com/oto/dat-binh-duong" title="đất bình dương"><span itemprop="name">đất bình dương</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="20"><a itemprop="url" href="https://bonbanh.com/oto/dat-dong-nai" title="đất đồng nai"><span itemprop="name">đất đồng nai</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="21"><a itemprop="url" href="https://bonbanh.com/oto/cho-thue-can-ho" title="cho thuê căn hộ"><span itemprop="name">cho thuê căn hộ</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="22"><a itemprop="url" href="https://bonbanh.com/oto/cho-thue-nha-pho" title="cho thuê nhà phố"><span itemprop="name">cho thuê nhà phố</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="23"><a itemprop="url" href="https://bonbanh.com/oto/cho-thue-van-phong" title="cho thuê văn phòng"><span itemprop="name">cho thuê văn phòng</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="24"><a itemprop="url" href="https://bonbanh.com/oto/cho-thue-mat-bang" title="cho thuê mặt bằng"><span itemprop="name">cho thuê mặt bằng</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="25"><a itemprop="url" href="https://bonbanh.com/oto/phap-ly-du-an" title="pháp lý dự án"><span itemprop="name">pháp lý dự án</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="26"><a itemprop="url" href="https://bonbanh.com/oto/du-an-moi" title="dự án mới"><span itemprop="name">dự án mới</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="27"><a itemprop="url" href="https://bonbanh.com/oto/mua-ban-bds" title="mua bán bđs"><span itemprop="name">mua bán bđs</span></a></li>
+                <li itemscope="" itemtype="http://schema.org/ListItem" itemprop="itemListElement">
+                    <meta itemprop="position" content="28"><a itemprop="url" href="https://bonbanh.com/oto/cho-thue-bds" title="cho thuê bđs"><span itemprop="name">cho thuê bđs</span></a></li>
+            </ul>
+        </div>
+    </div>
+
     <script>
         (function() {
             var toggleBtn = document.getElementById("mobile-menu-toggle");
@@ -1669,8 +1964,195 @@
                     closePanels();
                 }
             });
+
+            (function initSavedListings() {
+                var STORAGE_KEY = "smartland_saved_listings";
+                var saveButtons = Array.prototype.slice.call(document.querySelectorAll(".save-listing-btn"));
+                var savedCountEl = document.getElementById("count_saved");
+
+                function getSavedIds() {
+                    try {
+                        var raw = window.localStorage.getItem(STORAGE_KEY);
+                        if (!raw) {
+                            return [];
+                        }
+                        var parsed = JSON.parse(raw);
+                        return Array.isArray(parsed) ? parsed : [];
+                    } catch (e) {
+                        return [];
+                    }
+                }
+
+                function setSavedIds(ids) {
+                    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(ids));
+                }
+
+                function updateSavedCount(count) {
+                    if (!savedCountEl) {
+                        return;
+                    }
+                    if (count > 0) {
+                        savedCountEl.textContent = count > 99 ? "99+" : String(count);
+                        savedCountEl.style.display = "inline-block";
+                    } else {
+                        savedCountEl.textContent = "0";
+                        savedCountEl.style.display = "none";
+                    }
+                }
+
+                function renderButtons(savedIds) {
+                    saveButtons.forEach(function(button) {
+                        var icon = button.querySelector(".star-icon");
+                        var listingId = button.getAttribute("data-listing-id");
+                        var isSaved = listingId && savedIds.indexOf(listingId) !== -1;
+                        button.classList.toggle("is-saved", isSaved);
+                        button.setAttribute("aria-pressed", isSaved ? "true" : "false");
+                        button.setAttribute("title", isSaved ? "Bỏ lưu tin" : "Lưu tin");
+                        if (icon) {
+                            icon.textContent = isSaved ? "★" : "☆";
+                        }
+                    });
+                }
+
+                var savedIds = getSavedIds();
+                renderButtons(savedIds);
+                updateSavedCount(savedIds.length);
+
+                saveButtons.forEach(function(button) {
+                    button.addEventListener("click", function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        var listingId = button.getAttribute("data-listing-id");
+                        if (!listingId) {
+                            return;
+                        }
+
+                        var ids = getSavedIds();
+                        var idx = ids.indexOf(listingId);
+                        if (idx === -1) {
+                            ids.push(listingId);
+                        } else {
+                            ids.splice(idx, 1);
+                        }
+
+                        setSavedIds(ids);
+                        renderButtons(ids);
+                        updateSavedCount(ids.length);
+                    });
+                });
+            })();
+
+            (function initListingPagination() {
+                var listContent = document.querySelector("#h-list-car .g-box-content");
+                var pager = document.getElementById("listing-pagination");
+                var totalLabel = document.getElementById("listing-total");
+                if (!listContent || !pager) {
+                    return;
+                }
+
+                var cards = Array.prototype.slice.call(listContent.querySelectorAll(".car-item"));
+                if (!cards.length) {
+                    pager.style.display = "none";
+                    return;
+                }
+
+                var pageSize = 2;
+                var currentPage = 1;
+
+                function totalPages() {
+                    return Math.max(1, Math.ceil(cards.length / pageSize));
+                }
+
+                function makeButton(label, className, disabled, onClick) {
+                    var btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.className = "page-btn" + (className ? " " + className : "");
+                    btn.textContent = label;
+                    btn.disabled = !!disabled;
+                    btn.addEventListener("click", onClick);
+                    return btn;
+                }
+
+                function renderPager() {
+                    var pages = totalPages();
+                    pager.innerHTML = "";
+                    pager.appendChild(makeButton("Trước", "prev-btn", currentPage === 1, function() {
+                        if (currentPage > 1) {
+                            currentPage -= 1;
+                            renderPage();
+                        }
+                    }));
+
+                    for (var i = 1; i <= pages; i += 1) {
+                        (function(pageNumber) {
+                            var pageBtn = makeButton(String(pageNumber), pageNumber === currentPage ? "active" : "", false, function() {
+                                if (currentPage !== pageNumber) {
+                                    currentPage = pageNumber;
+                                    renderPage();
+                                }
+                            });
+                            pager.appendChild(pageBtn);
+                        })(i);
+                    }
+
+                    pager.appendChild(makeButton("Sau", "next-btn", currentPage === pages, function() {
+                        if (currentPage < pages) {
+                            currentPage += 1;
+                            renderPage();
+                        }
+                    }));
+                }
+
+                function renderPage() {
+                    var pages = totalPages();
+                    if (currentPage > pages) {
+                        currentPage = pages;
+                    }
+                    var start = (currentPage - 1) * pageSize;
+                    var end = start + pageSize;
+                    var visibleIndex = 0;
+
+                    cards.forEach(function(card, index) {
+                        var visible = index >= start && index < end;
+                        card.style.display = visible ? "grid" : "none";
+                        if (visible) {
+                            card.classList.remove("row1", "row2");
+                            card.classList.add(visibleIndex % 2 === 0 ? "row1" : "row2");
+                            visibleIndex += 1;
+                        }
+                    });
+
+                    if (totalLabel) {
+                        totalLabel.textContent = "Tổng : " + cards.length + " tin - Trang " + currentPage + "/" + pages;
+                    }
+                    renderPager();
+                }
+
+                renderPage();
+            })();
         })();
     </script>
+
+    <div id="footer">
+        <div class="l-footer"></div>
+        <div class="c-footer">
+            <div class="f-menu"><a href="https://bonbanh.com/" class="f-link" title="mua ban oto">Trang chủ</a> <span>|</span><a rel="nofollow" href="quy-che-hoat-dong/#dangtin" class="f-link">Quy định đăng tin</a> <span>|</span><a rel="nofollow" href="quy-che-hoat-dong/"
+                    class="f-link">Quy chế hoạt động</a> <span>|</span><a rel="nofollow" href="chinh-sach-quyen-rieng-tu/" class="f-link">Bảo mật</a> <span>|</span> <a rel="nofollow" href="gioi-thieu/" class="f-link">Trợ giúp</a> <span>|</span><a rel="nofollow"
+                    href="lien-he/" class="f-link">Liên hệ</a> </div>
+            <div class="f-copyright">
+                <div style="float: left; width: 746px;"><strong>Bonbanh.com - Chuyên trang mua bán ô tô uy tín nhất Việt Nam từ năm 2006.</strong><br>Điện thoại: 024-7109 7999 . Email:
+                    <script>
+                        document.write("con" + "tact@" + "bon" + "banh.com");
+                    </script>contact@bonbanh.com. <span>Hotline: <script>document.write("094"+" 2727"+" 225");</script>094 2727 225</span><br><span style="color:red">Bonbanh không bán xe trực tiếp, quý khách mua xe vui lòng liên hệ trực tiếp người đăng tin.<br></span>Copyright
+                    © 2006-2026 <a href="https://bonbanh.com/" title="oto, mua ban oto">Bonbanh.com</a> - <b style="font-weight:bold">Công ty cổ phần Kypernet Việt Nam.</b> Mã số doanh nghiệp: 0101833960 &nbsp; &nbsp;1</div>
+                <div style="float: right; width: 200px;margin-top:3px">
+                    <a rel="nofollow" href="http://online.gov.vn/Home/WebDetails/8602" target="_blank"><img src="https://s.bonbanh.com/img/bct.gif" title="Bonbanh.com đã đăng ký với Bộ Công Thương" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="r-footer"></div>
+    </div>
 </body>
 
 </html>
