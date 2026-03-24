@@ -18,7 +18,7 @@ a {
 #header {
     width: 1119px;
     margin: 0 auto;
-    padding-top: 6px;
+  
     background: #fff;
 }
 
@@ -195,7 +195,7 @@ a {
 .y-box-content2,
 .b-box-content,
 .g-box-content {
-    padding: 5px;
+
     font-size: 12px;
 }
 
@@ -313,7 +313,6 @@ a {
 
 .car-item {
     border-bottom: 1px solid #d9d9d9;
-    padding: 8px 6px;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 145px;
     column-gap: 8px;
@@ -345,17 +344,20 @@ a {
 }
 
 .cb2 b {
-    grid-column: 2;
     display: block;
     margin-bottom: 3px;
     color: #0f3fb1;
     font-size: 14px;
     line-height: 1.15;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .cb2 {
     grid-column: 1;
     grid-row: 1;
+    min-width: 0;
 }
 
 .cb3 {
@@ -409,6 +411,7 @@ a {
 }
 
 .cb6 .info_right {
+    font-size: 15px;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     column-gap: 16px;
@@ -468,6 +471,44 @@ a {
     margin-top: 8px;
     display: flex;
     justify-content: flex-end;
+    gap: 12px;
+    align-items: center;
+}
+
+.message-listing-btn {
+    border: 0;
+    background: transparent;
+    color: #4a90e2;
+    font-size: 18px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.message-listing-btn:hover {
+    color: #2e6bb8;
+}
+
+.message-listing-btn .message-icon {
+    display: inline-block;
+    width: 18px;
+    text-align: center;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.message-listing-btn .label {
+    font-size: 17px;
+    color: #4a90e2;
+    font-weight: 400;
+}
+
+.message-listing-btn:hover .label {
+    color: #2e6bb8;
 }
 
 .save-listing-btn {
@@ -1049,8 +1090,7 @@ a {
     .annotate_ico,
     #h_intro.pdes_blk {
         width: 100%;
-        padding-left: 8px;
-        padding-right: 8px;
+     
     }
     #page-wrap {
         display: block;
@@ -1175,8 +1215,8 @@ a {
     }
     #header,
     #page-wrap {
-        padding-left: 6px;
-        padding-right: 6px;
+        padding-left: 4px;
+        padding-right: 4px;
     }
     #page-wrap {
         margin-top: 6px;
@@ -1193,7 +1233,7 @@ a {
     }
     .car-item {
         grid-template-columns: 1fr;
-        padding: 8px 4px;
+      
     }
     .car-item>a {
         grid-template-columns: 104px minmax(0, 1fr) 92px;
@@ -1266,6 +1306,7 @@ a {
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
         column-gap: 10px;
         row-gap: 4px;
+        font-size: 15px;
     }
     .cb6 p {
         margin: 2px 0 0;
